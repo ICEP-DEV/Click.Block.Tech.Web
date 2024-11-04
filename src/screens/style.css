@@ -1,0 +1,245 @@
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 50px;
+}
+h2{
+    text-align: center;
+    color: white;
+}
+.card h2{
+    text-align: center;
+    color: white;
+}
+
+#header{
+    text-align: center;
+}
+
+.nav_button{
+    margin: 10px 20px;
+}
+
+#customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
+  .dashboard-container {
+    padding: 20px;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .search-input {
+    padding: 10px;
+    width: 60%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .dashboard-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    flex: 1 1 150px;
+    padding: 20px;
+    background-color: red;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  .dashboard-container {
+    padding: 20px;
+    padding-top: 80px;
+    background-image: url('../assets/backgroundPic.jpeg'); /* Change to your image path */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Keep the image fixed */
+    min-height: 100vh; /* Ensure it covers the full height of the viewport */
+    color: white; /* Ensure text is visible over the background */
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .search-input {
+    padding: 10px;
+    width: 60%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .dashboard-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .cards-container .card {
+    flex: 1 1 150px;
+    padding: 20px;
+    background-color: #1C5288;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  
+  /* Panic Button Feature Usage Section */
+  .panic-feature-section {
+    margin-top: 40px;
+  }
+  
+  .section-heading {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .charts-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .line-chart, .pie-chart {
+    flex: 1 1 300px;
+    max-width: 45%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+  }
+  .chart-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+.dashboard-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #1C5288;
+  position: fixed; /* Fixed positioning */
+  top: 0; /* Align to the top of the viewport */
+  left: 0; /* Align to the left */
+  right: 0; /* Align to the right */
+  /* background-color: rgba(0, 0, 0, 0.8);  */
+  padding: 10px; /* Padding around header */
+  z-index: 1000;
+}
+
+.profile-icon,
+.notification-bell {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.app-logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.search-bar {
+  margin-top: 120px;
+  padding: 10px;
+}
+.table-section {
+  margin-top: 20px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #1C5288;
+}
+
+.data-table th {
+  background-color: #1C5288;
+  font-weight: bold;
+}
+.profile-icon img,
+.notification-bell img {
+  width: 50px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+.app-logo img{
+  width: 100px; /* Adjust size as needed */
+  height: auto;
+}
