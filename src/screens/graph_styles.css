@@ -1,0 +1,71 @@
+/* Styles specific to the PanicButtonFeature component */
+
+/* Container for the panic feature section */
+.graphs-panic-feature-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* Line Chart Container */
+  .graphs-line-chart {
+    flex: 0 1 45%; /* Set width to 45% for a more rectangular shape */
+    padding: 20px;
+    background-color: #02457A;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    max-width: 100%; /* Set a maximum width */
+    height: 450px; /* Set a fixed height for rectangular shape */
+  }
+  
+  /* Doughnut Chart Container - Adjusted for Compact Rectangular Shape */
+  .graphs-doughnut-chart {
+    flex: 0 1 2%; /* Reduced width */
+    padding: 50px;
+    background-color: #02457A;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    max-width: 900px; /* Smaller max width for compact appearance */
+    height: 450px; /* Reduced height for smaller donut */
+    text-align: center;
+    position: relative; /* Allow positioning of dropdown within */
+  }
+  
+  /* Section Heading */
+  .graphs-section-heading {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  /* Month-Year Filter Styling - Positioning Inside Doughnut Chart Container */
+  .graphs-month-year-filter {
+    position: absolute;
+    bottom: 15px; /* Position dropdown inside the container */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .graphs-month-year-filter select {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    color: #02457A;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  /* Adjust chart canvas radius */
+  .graphs-line-chart .chartjs-render-monitor,
+  .graphs-doughnut-chart .chartjs-render-monitor {
+    border-radius: 8px;
+  }
+  

@@ -94,7 +94,7 @@ h2{
   .dashboard-container {
     padding: 20px;
     padding-top: 80px;
-    background-image: url('../assets/backgroundPic.jpeg'); /* Change to your image path */
+    background-image: url('https://cdn.pixabay.com/photo/2015/04/23/21/59/hot-air-balloon-736879_1280.jpg'); /* Change to your image path */
     background-size: cover; /* Cover the entire container */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent the image from repeating */
@@ -243,3 +243,30 @@ h2{
   width: 100px; /* Adjust size as needed */
   height: auto;
 }
+
+/* Custom Search Bar Styling */
+.custom-search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px; /* Adjusted to push the search bar below the header */
+}
+
+.custom-search-input {
+  width: 80%; /* Adjust width as needed */
+  max-width: 1000px;
+  padding: 12px 20px;
+  font-size: 20px;
+  border-radius: 20px;
+  border: 3px solid #02457A; /* Updated border color */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+  text-align: center;
+  color: #02457A;
+}
+
+.custom-search-input::placeholder {
+  color: #b0c4de; /* Light blue placeholder color */
+  font-size: 20px;
+}
+
