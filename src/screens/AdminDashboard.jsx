@@ -45,10 +45,16 @@ const AdminDashboard = () => {
   return (
     <div className="dashboard-container">
       <ProfileHeader />
-      <SearchBar/>
-      <h1 className="dashboard-heading">Customer Accounts Management</h1>
+      <SearchBar />
+      <div className="spacer"></div> {/* Spacer for space between header and the rest */}
+      <h1 className="dashboard-heading">CUSTOMER ACCOUNTS MANAGEMENT</h1>
       <StatsCards />
-      <PanicButtonFeature monthlyPieData={monthlyPieData} selectedMonthYear={selectedMonthYear} setSelectedMonthYear={setSelectedMonthYear} />
+      <h1 className="dashboard-heading">PANIC BUTTON FEATURE USAGE</h1>
+      <PanicButtonFeature
+        monthlyPieData={monthlyPieData}
+        selectedMonthYear={selectedMonthYear}
+        setSelectedMonthYear={setSelectedMonthYear}
+      />
       <AccountActionsLog tableData={tableData} />
       <SupportMessages supportMessages={supportMessages} />
     </div>

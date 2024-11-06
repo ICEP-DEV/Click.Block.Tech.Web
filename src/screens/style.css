@@ -1,219 +1,201 @@
-.form-group{
-    display: flex;
-    flex-direction: column;
-    margin: 20px 50px;
-}
-h2{
-    text-align: center;
-    color: white;
-}
-.card h2{
-    text-align: center;
-    color: white;
-}
-
-#header{
-    text-align: center;
-}
-
-.nav_button{
-    margin: 10px 20px;
-}
-
-#customers {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  #customers td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  #customers tr:nth-child(even){background-color: #f2f2f2;}
-  
-  #customers tr:hover {background-color: #ddd;}
-  
-  #customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #04AA6D;
-    color: white;
-  }
-
-  .dashboard-container {
-    padding: 20px;
-  }
-  
-  .search-bar {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .search-input {
-    padding: 10px;
-    width: 60%;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .dashboard-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .cards-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    flex: 1 1 150px;
-    padding: 20px;
-    background-color: red;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .card h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .card p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #4CAF50;
-  }
-  .dashboard-container {
-    padding: 20px;
-    padding-top: 80px;
-    background-image: url('https://cdn.pixabay.com/photo/2015/04/23/21/59/hot-air-balloon-736879_1280.jpg'); /* Change to your image path */
-    background-size: cover; /* Cover the entire container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-attachment: fixed; /* Keep the image fixed */
-    min-height: 100vh; /* Ensure it covers the full height of the viewport */
-    color: white; /* Ensure text is visible over the background */
-  }
-  
-  .search-bar {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .search-input {
-    padding: 10px;
-    width: 60%;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .dashboard-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .cards-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .cards-container .card {
-    flex: 1 1 150px;
-    padding: 20px;
-    background-color: #1C5288;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .card h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .card p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #4CAF50;
-  }
-  
-  /* Panic Button Feature Usage Section */
-  .panic-feature-section {
-    margin-top: 40px;
-  }
-  
-  .section-heading {
-    font-size: 22px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .charts-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .line-chart, .pie-chart {
-    flex: 1 1 300px;
-    max-width: 45%;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-  }
-  .chart-container {
-  width: 100%;
-  max-width: 500px;
-  margin: auto;
-}
-.dashboard-container {
-  width: 100%;
-  padding: 20px;
-}
-
+/* Header Styling */
 .top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   background-color: #1C5288;
-  position: fixed; /* Fixed positioning */
-  top: 0; /* Align to the top of the viewport */
-  left: 0; /* Align to the left */
-  right: 0; /* Align to the right */
-  /* background-color: rgba(0, 0, 0, 0.8);  */
-  padding: 10px; /* Padding around header */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
 }
 
-.profile-icon,
-.notification-bell {
-  font-size: 24px;
+.profile-icon-img,
+.notification-icon-img {
+  width: 50px; /* Adjust size as needed */
+  height: auto;
+  border-radius: 50%; /* Make the profile image round */
   cursor: pointer;
 }
 
-.app-logo {
-  font-size: 20px;
-  font-weight: bold;
+.center-logo-img {
+  width: 200px; /* Increase the size of the central logo */
+  height: auto;
+  margin: -70px; /* making the size of header background smaller in terms of height */
+}
+
+/* Additional styling from previous code */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 50px;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+}
+
+.card h2 {
+  text-align: center;
+  color: white;
+}
+
+#header {
+  text-align: center;
+}
+
+.nav_button {
+  margin: 10px 20px;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.dashboard-container {
+  padding: 20px;
 }
 
 .search-bar {
-  margin-top: 120px;
-  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+ 
 }
+
+.search-input {
+  padding: 10px;
+  width: 60%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.dashboard-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-top: 50px; /* Add some space above the heading */
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  background-color: #1C5288;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.dashboard-container {
+  padding: 20px;
+  padding-top: 80px;
+  background-image: url('https://cdn.pixabay.com/photo/2015/04/23/21/59/hot-air-balloon-736879_1280.jpg'); /* Change to your image path */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed; /* Keep the image fixed */
+  min-height: 100vh; /* Ensure it covers the full height of the viewport */
+  color: white; /* Ensure text is visible over the background */
+}
+
+.cards-container .card {
+  flex: 1 1 150px;
+  padding: 20px;
+  background-color: #1C5288;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  
+}
+
+/* Panic Button Feature Usage Section */
+.panic-feature-section {
+  margin-top: 40px;
+}
+
+.section-heading {
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.charts-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.line-chart, .pie-chart {
+  flex: 1 1 300px;
+  max-width: 45%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
 .table-section {
   margin-top: 20px;
 }
@@ -234,22 +216,13 @@ h2{
   background-color: #1C5288;
   font-weight: bold;
 }
-.profile-icon img,
-.notification-bell img {
-  width: 50px; /* Adjust size as needed */
-  height: auto; /* Maintain aspect ratio */
-}
-.app-logo img{
-  width: 100px; /* Adjust size as needed */
-  height: auto;
-}
 
 /* Custom Search Bar Styling */
 .custom-search-bar {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 150px; /* Adjusted to push the search bar below the header */
+  margin-top: 30px; /* Adjusted to push the search bar below the header */
 }
 
 .custom-search-input {
@@ -257,7 +230,7 @@ h2{
   max-width: 1000px;
   padding: 12px 20px;
   font-size: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: 3px solid #02457A; /* Updated border color */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   outline: none;
@@ -270,3 +243,10 @@ h2{
   font-size: 20px;
 }
 
+/* Spacer Styling */
+.spacer {
+  height: 40px; /* Adjust the height of the spacer as needed */
+}
+
+
+/* Additional styles from the previous code */
