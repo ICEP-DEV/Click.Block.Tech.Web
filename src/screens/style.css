@@ -14,20 +14,19 @@
 
 .profile-icon-img,
 .notification-icon-img {
-  width: 50px; /* Adjust size as needed */
+  width: 50px;
   height: auto;
-  border-radius: 50%; /* Make the profile image round */
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .center-logo-img {
-  width: 200px; /* Increase the size of the central logo */
+  width: 200px;
   height: auto;
-  margin: -70px; /* making the size of header background smaller in terms of height */
+  margin: -70px;
 }
 
 /* Additional styling from previous code */
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -86,7 +85,6 @@ h2 {
 .search-bar {
   margin-bottom: 20px;
   text-align: center;
- 
 }
 
 .search-input {
@@ -100,27 +98,26 @@ h2 {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
-  margin-top: 50px; /* Add some space above the heading */
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 24px;
+  margin-top: 50px;
   color: white;
 }
 
+/* Cards Container - Align cards horizontally with proper spacing */
 .cards-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 20px; /* Adjusted spacing between cards */
   flex-wrap: wrap;
   margin-top: 40px;
 }
 
+/* Card Styles */
 .card {
-  width: 200px;
-  height: 200px;
+  width: 180px; /* Set consistent width for all cards */
+  height: 160px; /* Set consistent height for all cards */
   background-color: #1C5288;
-  border-radius: 12px;
+  border-radius: 10px; /* Slightly rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -128,39 +125,64 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  padding: 15px; /* Adjusted padding */
 }
 
-.card h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.card p {
-  font-size: 24px;
+/* Card Icon Styling */
+.card-icon {
+  font-size: 45px; /* Adjusted icon size */
+  margin-bottom: 15px; /* Adjust space between icon and heading */
+}
+
+/* Card Value Styling */
+.card-value {
+  font-size: 32px; /* Adjusted number size */
   font-weight: bold;
-  color: #4CAF50;
 }
 
+/* Colors for Different Card Values */
+.active-value {
+  color: #4CAF50; /* Green for active accounts */
+}
+
+.frozen-value {
+  color: grey; /* Grey for frozen accounts */
+}
+
+.deactivated-value {
+  color: red; /* Red for deactivated accounts */
+}
+
+.restored-value {
+  color: #00BFFF; /* Light blue for restored accounts */
+}
+
+/* Background Styling for Dashboard */
 .dashboard-container {
   padding: 20px;
   padding-top: 80px;
-  background-image: url('https://cdn.pixabay.com/photo/2015/04/23/21/59/hot-air-balloon-736879_1280.jpg'); /* Change to your image path */
-  background-size: cover; /* Cover the entire container */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
-  background-attachment: fixed; /* Keep the image fixed */
-  min-height: 100vh; /* Ensure it covers the full height of the viewport */
-  color: white; /* Ensure text is visible over the background */
+  background-image: url('https://cdn.pixabay.com/photo/2015/04/23/21/59/hot-air-balloon-736879_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
 }
 
 .cards-container .card {
   flex: 1 1 150px;
-  padding: 20px;
+  padding: 15px;
   background-color: #1C5288;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  
 }
 
 /* Panic Button Feature Usage Section */
@@ -222,16 +244,16 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px; /* Adjusted to push the search bar below the header */
+  margin-top: 30px;
 }
 
 .custom-search-input {
-  width: 80%; /* Adjust width as needed */
+  width: 80%;
   max-width: 1000px;
   padding: 12px 20px;
   font-size: 20px;
   border-radius: 10px;
-  border: 3px solid #02457A; /* Updated border color */
+  border: 3px solid #02457A;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   outline: none;
   text-align: center;
@@ -239,14 +261,131 @@ h2 {
 }
 
 .custom-search-input::placeholder {
-  color: #b0c4de; /* Light blue placeholder color */
+  color: #b0c4de;
   font-size: 20px;
 }
 
 /* Spacer Styling */
 .spacer {
-  height: 40px; /* Adjust the height of the spacer as needed */
+  height: 40px;
 }
 
+/* Support Messages Section */
+.support-messages-section {
+  padding: 80px;
+}
 
-/* Additional styles from the previous code */
+.support-messages-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Reduced gap for a more compact layout */
+  justify-content: center;
+}
+
+/* Support Card Styling */
+.support-card {
+  background-color: white;
+  border-radius: 10px; /* Slightly reduced rounding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 240px; /* Reduced width to make the cards smaller */
+  padding: 15px; /* Reduced padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.support-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Support Card Header */
+.support-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Reduced gap between icon and text */
+  margin-bottom: 10px; /* Reduced margin for a tighter look */
+}
+
+.support-card-icon {
+  font-size: 40px; /* Reduced icon size */
+  color: #1C5288;
+}
+
+.support-card-name {
+  margin: 0;
+  font-size: 16px; /* Reduced font size */
+  font-weight: bold;
+  color: #333;
+}
+
+.support-card-email {
+  margin: 0;
+  color: #777;
+  font-size: 13px; /* Reduced font size */
+}
+
+/* Support Card Body */
+.support-card-body {
+  font-size: 13px; /* Reduced font size */
+  color: #444;
+}
+
+.support-card-message {
+  margin-top: 8px; /* Reduced margin for compactness */
+  margin-bottom: 8px; /* Reduced margin for compactness */
+  color: #555;
+}
+
+.support-card-datetime {
+  font-size: 11px; /* Reduced font size */
+  color: #999;
+  text-align: right;
+  margin-bottom: 15px; /* Reduced margin for compactness */
+}
+
+/* Support Buttons Styling */
+.support-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.resolve-btn,
+.view-btn {
+  border: none;
+  border-radius: 15px; /* Slightly reduced rounding */
+  padding: 8px 16px; /* Reduced padding for smaller buttons */
+  cursor: pointer;
+  font-size: 13px; /* Reduced font size */
+}
+
+.resolve-btn {
+  background-color: #4CAF50;
+  color: white;
+  margin-left: 390px;
+}
+
+.view-btn {
+  background-color: #1C5288;
+  color: white;
+}
+
+/* Button Hover Effects */
+.resolve-btn:hover,
+.view-btn:hover {
+  opacity: 0.9;
+}
+
+/* Responsive Layout for Stacking Cards */
+@media (max-width: 768px) {
+  .support-messages-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .support-card {
+    width: 90%; /* Take up most of the screen width for better visibility */
+    margin-bottom: 15px; /* Add margin to separate stacked cards */
+  }
+}

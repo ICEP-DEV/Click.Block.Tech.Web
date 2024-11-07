@@ -55,7 +55,9 @@ const AdminDashboard = () => {
         selectedMonthYear={selectedMonthYear}
         setSelectedMonthYear={setSelectedMonthYear}
       />
+       <h1 className="dashboard-heading">Account Actions Log</h1>
       <AccountActionsLog tableData={tableData} />
+      <h2 className="dashboard-heading">Support Messages</h2>
       <SupportMessages supportMessages={supportMessages} />
     </div>
   );

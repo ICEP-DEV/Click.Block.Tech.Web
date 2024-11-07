@@ -4,7 +4,7 @@ import './style.css';
 const AccountActionsLog = ({ tableData }) => {
   return (
     <div className="table-section">
-      <h2 className="section-heading">Account Actions Log</h2>
+     
       <table className="data-table">
         <thead>
           <tr>
