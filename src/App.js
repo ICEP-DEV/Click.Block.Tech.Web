@@ -10,6 +10,7 @@ function App() {
       <Routes>
       <Route exact path='/' element={<Login />} />
       <Route exact path='/' element={<AdminDashboard />} />
+      
       </Routes>
     </Router>
   );

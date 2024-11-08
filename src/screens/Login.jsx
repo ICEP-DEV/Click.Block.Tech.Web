@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Login.css';
 import logo from '../assets/Logo.png';  // Import the logo
 import { useNavigate } from 'react-router-dom'; // to navigate after successful login
+import { BASE_URL } from '../API/API';  // Correct path to import API.js
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,22 +15,19 @@ const Login = () => {
     e.preventDefault();
     setError(''); // Reset error state
 
-    // Send login credentials to the backend API
     try {
-      const response = await axios.post('http://localhost:5000/admin/login', {
+      const response = await axios.post(`${BASE_URL}admin/login`, {
         Email: email,
         LoginPin: loginPin,
       });
 
       // If login is successful, navigate to the admin dashboard
       if (response.data) {
-        // Assuming response contains some kind of success message or admin info
-        // Redirect to the admin dashboard (adjust this route accordingly)
-        navigate('/screens/AdminDashboard.jsx'); // Use useNavigate hook for navigation in React Router v6
+        navigate('/screens/AdminDashboard'); // Navigate to admin dashboard
       }
     } catch (err) {
-      console.error('Error logging in:', err);
-      setError('Invalid credentials or server error'); // Handle errors
+      console.error('Error details:', err.response);  // Log the entire error response
+      setError(err.response?.data?.message || 'An error occurred during login');
     }
   };
 
@@ -68,3 +66,8 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+
