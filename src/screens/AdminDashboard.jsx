@@ -6,6 +6,7 @@ import PanicButtonFeature from './PanicButtonFeature';
 import AccountActionsLog from './AccountActionsLog';
 import SupportMessages from './SupportMessages';
 import SearchBar from './SearchBar';
+import Footer from './Footer';  // Import the Footer component
 
 const AdminDashboard = () => {
   const monthlyPieData = {
@@ -55,10 +56,11 @@ const AdminDashboard = () => {
         selectedMonthYear={selectedMonthYear}
         setSelectedMonthYear={setSelectedMonthYear}
       />
-       <h1 className="dashboard-heading">Account Actions Log</h1>
+      <h1 className="dashboard-heading">Account Actions Log</h1>
       <AccountActionsLog tableData={tableData} />
       <h2 className="dashboard-heading">Support Messages</h2>
       <SupportMessages supportMessages={supportMessages} />
+      <Footer /> {/* Add the Footer component at the bottom */}
     </div>
   );
 };
