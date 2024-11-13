@@ -13,7 +13,7 @@
     border: 2px solid #e2e8f0;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     outline: none;
-    color: #1e3a8a;
+    color:#1C5288;
     background: white;
   }
   
@@ -28,7 +28,7 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #1e3a8a;
+    color:#1C5288;
     padding: 5px;
     display: flex;
     align-items: center;
@@ -52,7 +52,7 @@
     font-size: 16px;
     font-weight: 600;
     color: white;
-    background-color: #1e3a8a;
+    background-color:#1C5288;
     margin: 0;
   }
   
@@ -63,7 +63,7 @@
     background: none;
     border: none;
     border-bottom: 1px solid #e2e8f0;
-    color: #1e3a8a;
+    color:#1C5288;
     font-size: 16px;
     cursor: pointer;
     margin: 0;

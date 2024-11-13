@@ -1,0 +1,78 @@
+.frozen-accounts-container {
+    margin: 30px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(28, 82, 136, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .frozen-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 20px;
+  }
+  
+  .accounts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .accounts-table th,
+  .accounts-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  .accounts-table th {
+    background-color: #1e3a8a;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .accounts-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .accounts-table tbody tr:hover {
+    background-color: #ddd;
+  }
+  
+  .no-accounts {
+    text-align: center;
+    padding: 20px;
+    color: #1e3a8a;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #1e3a8a;
+  }
+  
+  .page-number.active {
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  
+  .page-number:hover {
+    text-decoration: underline;
+  }
+  
