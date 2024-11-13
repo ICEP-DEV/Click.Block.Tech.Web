@@ -1,73 +1,83 @@
-/* Custom Search Bar Styling */
 .custom-search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    margin: 30px auto; /* Center horizontally */
-    width: 80%; /* Ensure the search bar has a defined width */
+    width: 80%;
     max-width: 1000px;
-}
-
-.custom-search-input {
+    margin: 30px auto;
+  }
+  
+  .custom-search-input {
     width: 100%;
-    padding: 12px 50px 12px 20px; /* Leave space for the three-dot icon */
+    padding: 12px 50px 12px 20px;
     font-size: 20px;
     border-radius: 10px;
-    border: 3px solid #02457A;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #e2e8f0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     outline: none;
-    color: #02457A;
-    text-align: center;
-    margin: 0; /* Remove any potential margin on the input */
-    box-sizing: border-box; /* Ensure padding doesn't affect the width */
-}
-
-.custom-search-input::placeholder {
-    color: #b0c4de;
+    color: #1e3a8a;
+    background: white;
+  }
+  
+  .custom-search-input::placeholder {
+    color: #94a3b8;
     font-size: 20px;
-}
-
-/* Three-Dot Menu Styling */
-.three-dot-menu {
-    cursor: pointer;
-    padding: 0; /* Remove padding to prevent layout shift */
+  }
+  
+  .three-dot-menu {
     position: absolute;
-    right: 20px; /* Position it inside the search bar on the right */
-    top: 50%; /* Center it vertically in the search bar */
+    right: 20px;
+    top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
-    color: #02457A;
-    margin: 0; /* Remove margin for consistency */
-}
-
-/* Dropdown Menu Styling */
-.dropdown {
-    position: absolute;
-    top: calc(100% + 5px); /* Place it just below the input with a small gap */
-    right: 0; /* Align with the right side of the search bar */
-    background-color: #34438e;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 200px;
-    z-index: 1000; /* Ensure the dropdown stays above other elements */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 0; /* Remove any padding in the dropdown container */
-    margin: 0; /* Remove any margin from the dropdown container */
-    box-sizing: border-box; /* Ensure padding doesn’t affect the width */
-}
-
-/* Dropdown Item Styling */
-.dropdown p {
-    padding:0px;
-    margin: 0;
     cursor: pointer;
-    transition:0.3s;
-    font-size: 14px;
-    color: #fff;
-}
-
-.dropdown p:hover {
-    background-color: #f1f1f1;
-    color: #333;
-}
+    color: #1e3a8a;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    margin-left: 750px;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    width: 250px;
+    z-index: 1000;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .section-header {
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background-color: #1e3a8a;
+    margin: 0;
+  }
+  
+  .dropdown button {
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1e3a8a;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0;
+    display: block;
+  }
+  
+  .dropdown button:last-child {
+    border-bottom: none;
+  }
+  
+  .dropdown button:hover {
+    background-color: #f8fafc;
+  }
+  
+  .dropdown-section:last-child {
+    border-bottom: none;
+  }
