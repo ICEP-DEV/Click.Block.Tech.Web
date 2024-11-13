@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUsers } from 'react-icons/fa'; // Importing an icon library for user icons
-import './style.css';
+import './statscard.css';
 
 const StatsCards = () => {
   return (
@@ -9,7 +9,7 @@ const StatsCards = () => {
       <div className="card">
         <FaUsers className="card-icon" />
         <p className="card-value" >1200</p>
-        <h3 style={{ color: 'white' }}>Total Customer Accounts</h3>
+        <h3 style={{ color: 'white' }}>Customer Accounts</h3>
       </div>
       <div className="card">
         <FaUsers className="card-icon" />
