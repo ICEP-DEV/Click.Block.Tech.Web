@@ -8,6 +8,7 @@ import AccountActionsLog from './AccountActionsLog';
 import SupportMessages from './SupportMessages';
 import SearchBar from './SearchBar';
 import Footer from './Footer';  // Import the Footer component
+import IncomingPanicAlerts from './Incoming_PanicAlerts';
 
 const AdminDashboard = () => {
   const navigate = useNavigate(); // Use the navigate hook for routing
@@ -18,6 +19,14 @@ const AdminDashboard = () => {
 
   const [selectedMonthYear, setSelectedMonthYear] = useState('Jan 2024');
 
+  const panicAlert = [
+    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Active Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Deactivated Accound', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    
+    // Add more table data here
+  ];
   const tableData = [
     { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
     { accountNumber: '123456', actionType: 'Active Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
@@ -57,6 +66,8 @@ const AdminDashboard = () => {
         selectedMonthYear={selectedMonthYear}
         setSelectedMonthYear={setSelectedMonthYear}
       />
+      <h1 className="dashboard-heading">Incoming Panic Alerts</h1>
+      <IncomingPanicAlerts tableData={panicAlert}/>
       <h1 className="dashboard-heading">Account Actions Log</h1>
       <AccountActionsLog tableData={tableData} />
       <h2 className="dashboard-heading">Support Messages</h2>
