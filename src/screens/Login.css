@@ -13,20 +13,20 @@ body, html {
     align-items: flex-start; 
     padding-top: 5vh; /* Adjusts the top spacing */
     padding-bottom: 5vh;
-    height: 100vh;
+    height: 20px;
     width: 100vw;
     
   }
   
   .login-box {
-    background-color: rgba(0, 0, 51, 0.85);
+    background:#07315ad2;
     padding: 1rem 2rem;
     border-radius: 12px;
-    width: 950px;
+    width: 900px;
     text-align: center;
     color: #ffffff;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-    margin-top: 2rem;
+    margin-top: 7rem;
   }
   
   .logo {
@@ -49,7 +49,7 @@ body, html {
   }
   
   .input-field {
-    width: 100%;
+    width: 630px;
     padding: 0.8rem;
     margin: 0.5rem 0;
     border: 1px solid #b0c4de;
