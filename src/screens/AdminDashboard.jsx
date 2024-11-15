@@ -50,7 +50,7 @@ const AdminDashboard = () => {
       <SearchBar onSearch={handleSearch} /> {/* Pass handleSearch as a prop */}
       <div className="spacer"></div> {/* Spacer for space between header and the rest */}
       <h1 className="dashboard-heading">CUSTOMER ACCOUNTS MANAGEMENT</h1>
-      <StatsCards />
+      <StatsCards/>
       <h1 className="dashboard-heading">PANIC BUTTON FEATURE USAGE</h1>
       <PanicButtonFeature
         monthlyPieData={monthlyPieData}
