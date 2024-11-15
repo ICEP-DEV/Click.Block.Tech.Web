@@ -1,0 +1,38 @@
+.footer-container {
+    background: linear-gradient(to bottom, #1C5288, #082544); /* Gradient from a lighter to a darker blue */
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    margin-top: 40px; /* Add space before the footer */
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Space between links */
+  }
+  
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: bold;
+  }
+  
+  .footer-links a:hover {
+    color: #00BFFF; /* Lighter blue on hover */
+  }
+  
+  .footer-separator {
+    margin: 0 10px;
+    color: #ffffff;
+  }
+  
+  .footer-version {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #dddddd; /* Light grey for the version text */
+  }
+  
