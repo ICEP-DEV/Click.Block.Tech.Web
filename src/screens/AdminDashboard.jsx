@@ -20,12 +20,20 @@ const AdminDashboard = () => {
 
   const tableData = [
     { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Active Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Deactivated Accound', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    
     // Add more table data here
   ];
 
   const supportMessages = [
     { initials: 'J.D.', surname: 'Doe', email: 'jdoe@example.com', dateTime: '2024-01-20 08:30', message: 'Need help with account activation' },
-    // Add more messages here
+    { initials: 'M.S.', surname: 'Smith', email: 'msmith@example.com', dateTime: '2024-01-20 09:15', message: 'Unable to login' },
+    { initials: 'A.T.', surname: 'Taylor', email: 'ataylor@example.com', dateTime: '2024-01-20 10:00', message: 'Request for password reset' },
+    { initials: 'R.B.', surname: 'Brown', email: 'rbrown@example.com', dateTime: '2024-01-20 10:45', message: 'Issue with account freezing' },
+    { initials: 'S.L.', surname: 'Lee', email: 'slee@example.com', dateTime: '2024-01-20 11:30', message: 'Account deactivation request' },
+    { initials: 'L.P.', surname: 'Perez', email: 'lperez@example.com', dateTime: '2024-01-20 12:00', message: 'Inquiry about account status' }
   ];
 
   // This function is passed to the SearchBar to handle search input
