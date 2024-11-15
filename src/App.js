@@ -1,3 +1,24 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminDashboard from './screens/AdminDashboard';
+import FrozenAccounts from './screens/Frozen'; // Import the frozen accounts component
+
+import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<AdminDashboard />} />
+        <Route path='/frozen-accounts' element={<FrozenAccounts />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AdminDashboard from './screens/AdminDashboard';
 import Login from './screens/Login';

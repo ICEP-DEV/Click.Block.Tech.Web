@@ -1,0 +1,59 @@
+.cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  
+  .card {
+    width: 200px;
+    height: 190px;
+    background-color: #7d3915; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(45, 96, 214, 0.547);
+    padding: 15px;
+  }
+  .cards-container .card {
+    background-color:#02457A !important; /* Using !important as a last resort */
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+  }
+  
+  .card-value {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .active-value {
+    color: #4CAF50;
+  }
+  
+  .frozen-value {
+    color: grey;
+  }
+  
+  .deactivated-value {
+    color: red;
+  }
+  
+  .restored-value {
+    color: #00BFFF;
+  }
+  
