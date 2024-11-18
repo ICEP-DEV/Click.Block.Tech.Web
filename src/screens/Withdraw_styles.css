@@ -1,0 +1,74 @@
+/* Withdraw_styles.css */
+
+.withdraw-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
+    color: white;
+    padding: 20px;
+  }
+  
+  /* Logo Styling */
+  .withdraw-logo {
+    width: 150px; /* Adjust size as needed */
+    margin-bottom: 25px;
+    margin-top: -150px;
+  }
+  
+  /* Heading Styling */
+  .withdraw-heading {
+    font-size: 15px;
+    margin: 0; /* Remove default margin */
+  }
+  
+  /* Instruction text styling */
+  .withdraw-instruction {
+    font-size: 10px;
+    margin: 10px 20px; /* Add margin above and below */
+  }
+  
+  /* Input box styling */
+  .withdraw-input {
+    width: 350px; /* Set width for the input */
+    padding: 5px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Light border color */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Space below input */
+    font-size: 16px; /* Font size */
+    color: #02457A;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4), /* Stronger inner shadow on focus */
+                0 0 10px rgba(0, 0, 0, 0.2); /* Slightly stronger outer shadow on focus */
+  }
+  
+  /* Warning text styling */
+  .withdraw-warning {
+    font-size: 10px;
+    color: #018ABE; 
+    margin-bottom: 20px; /* Space below warning */
+  }
+  
+  /* Button container */
+  .withdraw-buttons {
+    display: flex;
+    gap: 20px; /* Space between buttons */
+  }
+  
+  /* Button styling */
+  .withdraw-button {
+    background: transparent; /* Transparent background */
+    color: white; /* White text */
+    border: 1px solid white; /* White border */
+    border-radius: 0px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 10px; /* Font size for buttons */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+    margin: 1px;
+  }
+  
+  .withdraw-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+  }
+  

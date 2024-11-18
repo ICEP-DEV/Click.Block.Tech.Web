@@ -1,0 +1,63 @@
+/* Full Background Styling */
+.wallet-full-bg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
+    color: white;
+    text-align: center;
+  }
+  
+  .wallet-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .wallet-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .wallet-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 8px;
+  }
+  
+  .account-name {
+    font-size: 1.2em;
+    color: #ffffff;
+  }
+  
+  .account-balance {
+    font-size: 1.2em;
+    color: #ffea00; /* Yellow color for balance */
+  }
+  
+  /* Transparent Button Style */
+  .back-button {
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .back-button:hover {
+    background-color: #ffffff;
+    color: #1E5E98;
+  }
+  

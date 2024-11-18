@@ -1,0 +1,62 @@
+.atm-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(180deg, #0f0c29 0%, #16335d 60%, #1e5e98 94%);
+    color: white;
+    padding: 20px;
+  }
+  
+  .atm-logo {
+    width: 150px; 
+    margin-bottom: 20px;
+    margin-top: -100px;
+  }
+  
+  .atm-welcome-text {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .atm-instruction-text {
+    font-size: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .atm-options {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .atm-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .atm-option-image {
+    width: 100px;
+    margin-bottom: 10px;
+    transition: opacity 0.5s ease; 
+  }
+  
+
+  .qr-code:hover {
+    opacity: 0.5;
+    transform: scale(1.05); 
+  }
+  
+  .card-image:hover {
+    opacity: 0.5; 
+    transform: scale(1.05); 
+  }
+  

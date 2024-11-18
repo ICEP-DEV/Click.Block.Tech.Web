@@ -1,0 +1,89 @@
+/* QRCodePage_styles.css */
+
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Add shadow to the entire background */
+  }
+  
+  /* Logo Styling */
+  .qr-code-logo {
+    width: 150px; /* Adjust size as needed */
+    margin-bottom: 20px;
+    margin-top: -150px;
+  }
+  
+  /* Background wrapper for heading and subheading */
+  .qr-code-heading-container {
+    background-color: white; /* White background for the container */
+    padding: 40px; /* Padding around the text */
+    border-radius: 5px; /* Optional: Rounded corners */
+    text-align: center; /* Center align text */
+    margin-bottom: 20px; /* Space below the container */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    padding-top: 5px;
+    padding-bottom: 5px; /* Add shadow */
+  }
+  
+  /* Heading Styling */
+  .qr-code-heading {
+    font-size: 15px;
+    color: #052659;
+    margin: 0; /* Remove default margin */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add shadow to heading text */
+    padding-bottom: 0;
+}
+  
+  /* Subheading Styling */
+  .qr-code-subheading {
+    font-size: 15px;
+    color: #018ABE; /* Text color */
+    margin: 10px 0 0; /* Add margin on top, remove default bottom margin */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add shadow to subheading text */
+    margin-top: 0px;
+    
+  }
+  
+  /* Instruction text styling */
+  .qr-code-instruction {
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Transaction options container */
+  .qr-code-options {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Space between options */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  }
+  
+  /* Individual option styling */
+  .qr-code-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none; /* Remove underline from link */
+    color: rgb(255, 255, 255); /* Set text color for links */
+  }
+  
+  .qr-code-option-image {
+    width: 80px; /* Adjust size as needed */
+    margin-bottom: 5px;
+    transition: opacity 0.5s ease; 
+  }
+
+  .qr-code-option:hover {
+    opacity: 0.5;
+    transform: scale(1.05); 
+  }
+  

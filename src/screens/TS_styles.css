@@ -1,0 +1,72 @@
+/* Styles for the full-screen container with a gradient background */
+.fullscreen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
+  padding: 20px;
+  color: white; /* Adjust text color for better contrast */
+}
+
+/* Logo styling */
+.logo {
+  width: 150px; /* Adjust this size as needed */
+  margin-bottom: 20px; /* Space between the logo and the form */
+}
+
+/* Button styling with gradient */
+button {
+  background: linear-gradient(90deg, #1E5E98 0%, #0F0C29 100%);
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #0F0C29 0%, #1E5E98 100%);
+}
+
+/* Transaction list styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #f1f3f6;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+li p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+li p strong {
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  button {
+      font-size: 14px;
+      padding: 10px;
+  }
+
+  li p {
+      font-size: 12px;
+  }
+
+  .logo {
+      width: 100px; /* Smaller logo for mobile */
+  }
+}
