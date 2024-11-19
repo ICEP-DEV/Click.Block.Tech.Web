@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the hook for navigation
 import './style.css';
 import ProfileHeader from './ProfileHeader';
@@ -8,11 +8,34 @@ import AccountActionsLog from './AccountActionsLog';
 import SupportMessages from './SupportMessages';
 import SearchBar from './SearchBar';
 import Footer from './Footer';  // Import the Footer component
-
+import IncomingPanicAlerts from './Incoming_PanicAlerts';
+import ViewLiveLocationBtn from './components/view_liveLocation_btn';
+import ResolvePanicAlert from './components/resolve_panic_alert';
+import { BASE_URL } from '../API/API';
+import axios from 'axios';
 const AdminDashboard = () => {
   const navigate = useNavigate(); // Use the navigate hook for routing
-  const [supportMessages, setSupportMessages] = useState([]);
-  const [tableData, setTableData] = useState([]);
+  const [panicAlertsDate, setAlertData] = useState([]);
+  //gettingAlerts
+  useEffect(() => {
+    const fetchAllAlerts = async () => {
+      try{
+      const response = await axios.get(`${BASE_URL}/getAll_Alert`);
+      const customerData = response.data;
+      setAlertData(customerData.result.map(alert => ({
+      
+        customerID: alert._CustID_Nr,
+        alertType: alert._AlertType,
+        dateTime: alert._SentDate,
+        view: <ViewLiveLocationBtn locationID={alert._LocationID} route={'/live-location'}/>,
+        resolve: <ResolvePanicAlert/>
+    })));
+      }catch(err){
+        console.log(err);
+      }
+    };
+    fetchAllAlerts();
+  }, []);
   const monthlyPieData = {
     'Jan 2024': [65, 25, 10],
     // Add other months here
@@ -20,54 +43,24 @@ const AdminDashboard = () => {
 
   const [selectedMonthYear, setSelectedMonthYear] = useState('Jan 2024');
 
-   // Fetch account actions log from the endpoint
-   useEffect(() => {
-    const fetchAccountActionsLog = async () => {
-      try {
-        const response = await fetch('http://192.168.23.248:5000/api/account-actions');
-        const data = await response.json();
-        const formattedData = data.map((action) => ({
-          accountNumber: action.CustomerAccountNumber,
-          actionType: action['Action Type'],
-          dateTime: new Date(action['Date/Time']).toLocaleString(),
-          status: action['Account Status'],
-          performedBy: action.PerformedBy,
-        }));
-        setTableData(formattedData); // Update the table data state
-      } catch (error) {
-        console.error('Error fetching account actions log:', error);
-      }
-    };
+  
+  const tableData = [
+    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Active Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    { accountNumber: '123456', actionType: 'Deactivated Accound', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
+    
+    // Add more table data here
+  ];
 
-    fetchAccountActionsLog();
-  }, []);
-
-  // Fetch support messages from the endpoint
-  useEffect(() => {
-    const fetchSupportMessages = async () => {
-      try {
-        const response = await fetch('http://192.168.23.248:5000/api/messages');
-        const data = await response.json();
-        const formattedMessages = data.map(msg => ({
-          initials: msg.FullNames
-            .split(' ')
-            .map(name => name[0])
-            .join('.'),
-          surname: msg.FullNames.split(' ').slice(-1)[0],
-          fullName: msg.FullNames,
-          phoneNumber: msg.PhoneNumber,
-          email: msg.Email,
-          message: msg.MessageDescription,
-          status: msg.Status,
-        }));
-        setSupportMessages(formattedMessages);
-      } catch (error) {
-        console.error('Error fetching support messages:', error);
-      }
-    };
-
-    fetchSupportMessages();
-  }, []);
+  const supportMessages = [
+    { initials: 'J.D.', surname: 'Doe', email: 'jdoe@example.com', dateTime: '2024-01-20 08:30', message: 'Need help with account activation' },
+    { initials: 'M.S.', surname: 'Smith', email: 'msmith@example.com', dateTime: '2024-01-20 09:15', message: 'Unable to login' },
+    { initials: 'A.T.', surname: 'Taylor', email: 'ataylor@example.com', dateTime: '2024-01-20 10:00', message: 'Request for password reset' },
+    { initials: 'R.B.', surname: 'Brown', email: 'rbrown@example.com', dateTime: '2024-01-20 10:45', message: 'Issue with account freezing' },
+    { initials: 'S.L.', surname: 'Lee', email: 'slee@example.com', dateTime: '2024-01-20 11:30', message: 'Account deactivation request' },
+    { initials: 'L.P.', surname: 'Perez', email: 'lperez@example.com', dateTime: '2024-01-20 12:00', message: 'Inquiry about account status' }
+  ];
 
   // This function is passed to the SearchBar to handle search input
   const handleSearch = (searchTerm) => {
@@ -84,12 +77,14 @@ const AdminDashboard = () => {
       <div className="spacer"></div> {/* Spacer for space between header and the rest */}
       <h1 className="dashboard-heading">CUSTOMER ACCOUNTS MANAGEMENT</h1>
       <StatsCards/>
-      <h1 className="dashboard-heading">PANIC BUTTON FEATURE USAGE</h1>
+      <h1 className="dashboard-heading">PANIC ALERTS USAGE</h1>
       <PanicButtonFeature
         monthlyPieData={monthlyPieData}
         selectedMonthYear={selectedMonthYear}
         setSelectedMonthYear={setSelectedMonthYear}
       />
+      <h1 className="dashboard-heading">Incoming Panic Alerts</h1>
+      <IncomingPanicAlerts tableData={panicAlertsDate}/>
       <h1 className="dashboard-heading">Account Actions Log</h1>
       <AccountActionsLog tableData={tableData} />
       <h2 className="dashboard-heading">Support Messages</h2>

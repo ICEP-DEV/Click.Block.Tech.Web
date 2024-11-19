@@ -1,0 +1,87 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .realTimeTracking {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;  /* Ensures the background covers the full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Header Styling */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 31, 63, 0.8); /* Semi-transparent background for contrast */
+    color: white;
+    padding: 20px 20px;
+    width: 100%;
+    max-width: 2200px;
+  }
+  
+  .header-icon {
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .header-logo h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 0;
+    color: white;
+  }
+  
+  /* Styling for Subtitle */
+  .subtitle {
+    font-size: 1.2em;
+    color: #d0d0d0;
+    margin-top: 5px;
+    font-weight: normal;
+  }
+  
+  /* Styling for the Back Button Outside the Main Container */
+  .refresh-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #005080;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .back-button:hover {
+    background-color: #003f5f;
+  }
+  
+  /* Main Container Styling */
+  .main-container {
+    background: rgba(255, 255, 255, 0.8);
+    margin-top: 60px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+  }
+  
+ 
+  
+  
