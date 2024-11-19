@@ -78,7 +78,7 @@ const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMont
   return (
     <div className="graphs-panic-feature-section">
       <div className="graphs-line-chart">
-        <h2 className="graphs-section-heading">Panic Button Usage</h2>
+        <h2 className="graphs-section-heading">Panic Alerts Usage</h2>
         <Line data={lineData} options={lineOptions} />
       </div>
 

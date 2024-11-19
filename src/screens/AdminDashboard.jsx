@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the hook for navigation
 import './style.css';
 import ProfileHeader from './ProfileHeader';
@@ -9,9 +9,33 @@ import SupportMessages from './SupportMessages';
 import SearchBar from './SearchBar';
 import Footer from './Footer';  // Import the Footer component
 import IncomingPanicAlerts from './Incoming_PanicAlerts';
-
+import ViewLiveLocationBtn from './components/view_liveLocation_btn';
+import ResolvePanicAlert from './components/resolve_panic_alert';
+import { BASE_URL } from '../API/API';
+import axios from 'axios';
 const AdminDashboard = () => {
   const navigate = useNavigate(); // Use the navigate hook for routing
+  const [panicAlertsDate, setAlertData] = useState([]);
+  //gettingAlerts
+  useEffect(() => {
+    const fetchAllAlerts = async () => {
+      try{
+      const response = await axios.get(`${BASE_URL}/getAll_Alert`);
+      const customerData = response.data;
+      setAlertData(customerData.result.map(alert => ({
+      
+        customerID: alert._CustID_Nr,
+        alertType: alert._AlertType,
+        dateTime: alert._SentDate,
+        view: <ViewLiveLocationBtn locationID={alert._LocationID} route={'/live-location'}/>,
+        resolve: <ResolvePanicAlert/>
+    })));
+      }catch(err){
+        console.log(err);
+      }
+    };
+    fetchAllAlerts();
+  }, []);
   const monthlyPieData = {
     'Jan 2024': [65, 25, 10],
     // Add other months here
@@ -19,14 +43,7 @@ const AdminDashboard = () => {
 
   const [selectedMonthYear, setSelectedMonthYear] = useState('Jan 2024');
 
-  const panicAlert = [
-    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    { accountNumber: '123456', actionType: 'Active Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    { accountNumber: '123456', actionType: 'Deactivated Accound', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    
-    // Add more table data here
-  ];
+  
   const tableData = [
     { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
     { accountNumber: '123456', actionType: 'Active Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
@@ -60,14 +77,14 @@ const AdminDashboard = () => {
       <div className="spacer"></div> {/* Spacer for space between header and the rest */}
       <h1 className="dashboard-heading">CUSTOMER ACCOUNTS MANAGEMENT</h1>
       <StatsCards/>
-      <h1 className="dashboard-heading">PANIC BUTTON FEATURE USAGE</h1>
+      <h1 className="dashboard-heading">PANIC ALERTS USAGE</h1>
       <PanicButtonFeature
         monthlyPieData={monthlyPieData}
         selectedMonthYear={selectedMonthYear}
         setSelectedMonthYear={setSelectedMonthYear}
       />
       <h1 className="dashboard-heading">Incoming Panic Alerts</h1>
-      <IncomingPanicAlerts tableData={panicAlert}/>
+      <IncomingPanicAlerts tableData={panicAlertsDate}/>
       <h1 className="dashboard-heading">Account Actions Log</h1>
       <AccountActionsLog tableData={tableData} />
       <h2 className="dashboard-heading">Support Messages</h2>

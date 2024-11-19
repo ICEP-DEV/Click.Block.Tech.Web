@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Importing axios
 import { FaUsers } from 'react-icons/fa'; // Importing an icon library for user icons
 import './statscard.css';
-
+import { BASE_URL } from '../API/API';
 const StatsCards = () => {
   // State to hold the fetched data
   const [stats, setStats] = useState({
@@ -13,6 +13,8 @@ const StatsCards = () => {
     restoredAccounts: 0,
   });
 
+
+
   const [loading, setLoading] = useState(true); // Loading state
 
   // Fetch data from the API
@@ -20,7 +22,7 @@ const StatsCards = () => {
     const fetchData = async () => {
       try {
         // Fetch data from the API
-        const response = await axios.get('http://168.172.187.202:5000/api/customers/statistics');
+        const response = await axios.get(`${BASE_URL}customers/statistics`);
 
         // Log the response to check the data returned
         console.log('API Response:', response.data);
