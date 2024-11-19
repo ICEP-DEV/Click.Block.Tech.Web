@@ -18,11 +18,11 @@ const IncomingPanicAlerts = ({ tableData }) => {
         <tbody>
           {tableData.map((row, index) => (
             <tr key={index}>
-              <td>{row.accountNumber}</td>
-              <td>{row.actionType}</td>
+              <td>{row.customerID}</td>
+              <td>{row.alertType}</td>
               <td>{row.dateTime}</td>
-              <td>{row.status}</td>
-              <td>{row.performedBy}</td>
+              <td className='viewLiveLocation_tableData'>{row.view}</td>
+              <td className='resolve_panicAlert_td'>{row.resolve}</td>
             </tr>
           ))}
         </tbody>

@@ -75,7 +75,6 @@
   /* Main Container Styling */
   .main-container {
     background: rgba(255, 255, 255, 0.8);
-    padding: 200px;
     margin-top: 60px;
     border-radius: 8px;
     width: 100%;
@@ -83,6 +82,6 @@
     text-align: center;
   }
   
-  
+ 
   
   

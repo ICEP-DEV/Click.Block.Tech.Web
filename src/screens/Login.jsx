@@ -23,7 +23,7 @@ const Login = () => {
 
       // If login is successful, navigate to the admin dashboard
       if (response.data) {
-        navigate('/screens/AdminDashboard'); // Navigate to admin dashboard
+        navigate('/'); // Navigate to admin dashboard
       }
     } catch (err) {
       console.error('Error details:', err.response);  // Log the entire error response

@@ -11,7 +11,34 @@
   right: 0;
   z-index: 1000;
 }
+.resolve_panic_alert_btnContainer button{
+  width: 150px;
+  height: 35px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #02457A;
+}
+.alert_liveLocation_btn button{
+  width: 100px;
+  height: 35px;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #02457A;
 
+}
+.resolve_panic_alert_btnContainer
+{
+  padding-left: 15px;
+}
+.alert_liveLocation_btn{
+ padding-left: 15px;
+}
+.viewLiveLocation_tableData{
+  width: 150px;
+}
+.resolve_panicAlert_td{
+  width: 50px;
+}
 .profile-icon-img,
 .notification-icon-img {
   width: 50px;

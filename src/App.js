@@ -5,6 +5,7 @@ import FrozenAccounts from './screens/Frozen'; // Import the frozen accounts com
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Login from '../src/screens/Login';
+import RealTimeTracking from './screens/realTimeTracking';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path='/' element={<AdminDashboard />} />
         <Route exact path='/Login' element={<Login />} />
         <Route path='/frozen-accounts' element={<FrozenAccounts />} />
+        <Route path='/live-location' element={<RealTimeTracking />} />
       </Routes>
     </Router>
   );
