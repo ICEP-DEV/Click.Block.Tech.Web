@@ -20,7 +20,7 @@ const StatsCards = () => {
     const fetchData = async () => {
       try {
         // Fetch data from the API
-        const response = await axios.get('http://168.172.187.202:5000/api/customers/statistics');
+        const response = await axios.get('http://192.168.23.248:5000/api/customers/statistics');
 
         // Log the response to check the data returned
         console.log('API Response:', response.data);

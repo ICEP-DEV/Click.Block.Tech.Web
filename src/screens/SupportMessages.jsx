@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaUserCircle } from 'react-icons/fa'; // Import an icon for user initials
+import { FaUserCircle } from 'react-icons/fa';
 import './style.css';
 
 const SupportMessages = ({ supportMessages }) => {
@@ -19,16 +19,18 @@ const SupportMessages = ({ supportMessages }) => {
             </div>
             <div className="support-card-body">
               <p>
-                <strong>Full names:</strong> {msg.fullName}
+                <strong>Full Name:</strong> {msg.fullName}
               </p>
               <p>
                 <strong>Phone Number:</strong> {msg.phoneNumber}
               </p>
               <p>
-                <strong>Email address:</strong> {msg.email}
+                <strong>Email Address:</strong> {msg.email}
               </p>
               <p className="support-card-message">{msg.message}</p>
-              <p className="support-card-datetime">{msg.dateTime}</p>
+              <p className="support-card-status">
+                <strong>Status:</strong> {msg.status}
+              </p>
             </div>
             <div className="support-buttons">
               <button className="resolve-btn">Resolve</button>
