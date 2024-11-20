@@ -14,7 +14,7 @@ const SupportMessages = ({ supportMessages }) => {
                 <h3 className="support-card-name">
                   {msg.initials} {msg.surname}
                 </h3>
-                <p className="support-card-email">{msg.email}</p>
+                {/* <p className="support-card-email">{msg.email}</p> */}
               </div>
             </div>
             <div className="support-card-body">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './graph_styles.css';
 import { Line, Doughnut } from 'react-chartjs-2';
 import { Chart, LineElement, PointElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
+import { BASE_URL } from '../API/API';
 
 Chart.register(LineElement, PointElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend);
 
@@ -27,7 +28,7 @@ const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMont
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.23.248:5000/api/allCustomers/logs');
+        const response = await fetch(`${BASE_URL}/allCustomers/logs`);
         const data = await response.json();
 
         // Calculate counts per month
