@@ -7,15 +7,14 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Login from '../src/screens/Login';
 import RealTimeTracking from './screens/realTimeTracking';
-import ActiveAccounts from './screens/ActiveAccounts';
-import DeactivatedAccounts from './screens/DeactivateAccounts';
-import ResoredAccounts from './screens/RestoredAccounts';
+import ProtectedRoute from './screens/components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path='/' element={<AdminDashboard />} />
+        
+        <Route exact path='/' element={<ProtectedRoute> <AdminDashboard /></ProtectedRoute>} />
         <Route exact path='/Login' element={<Login />} />
         <Route path='/frozen-accounts' element={<FrozenAccounts />} />
         <Route path='/customer-accounts' element={<CustomerAccounts />} />
