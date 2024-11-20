@@ -39,6 +39,13 @@
 .resolve_panicAlert_td{
   width: 50px;
 }
+.icon-img {
+  width: 32px; /* Adjust size as needed */
+  height: 32px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
 .profile-icon-img,
 .notification-icon-img {
   width: 50px;

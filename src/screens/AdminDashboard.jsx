@@ -13,9 +13,64 @@ import ViewLiveLocationBtn from './components/view_liveLocation_btn';
 import ResolvePanicAlert from './components/resolve_panic_alert';
 import { BASE_URL } from '../API/API';
 import axios from 'axios';
+
+
 const AdminDashboard = () => {
+
   const navigate = useNavigate(); // Use the navigate hook for routing
+  const [supportMessages, setSupportMessages] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [panicAlertsDate, setAlertData] = useState([]);
+
+     // Fetch account actions log from the endpoint
+     useEffect(() => {
+      const fetchAccountActionsLog = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/account-actions`);
+          const data = await response.json();
+          const formattedData = data.map((action) => ({
+            accountNumber: action.CustomerAccountNumber,
+            actionType: action['Action Type'],
+            dateTime: new Date(action['Date/Time']).toLocaleString(),
+            status: action['Account Status'],
+            performedBy: action.PerformedBy,
+          }));
+          setTableData(formattedData); // Update the table data state
+        } catch (error) {
+          console.error('Error fetching account actions log:', error);
+        }
+      };
+  
+      fetchAccountActionsLog();
+    }, []);
+
+     // Fetch support messages from the endpoint
+  useEffect(() => {
+    const fetchSupportMessages = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/messages`);
+        const data = await response.json();
+        const formattedMessages = data.map(msg => ({
+          initials: msg.FullNames
+            .split(' ')
+            .map(name => name[0])
+            .join('.'),
+          surname: msg.FullNames.split(' ').slice(-1)[0],
+          fullName: msg.FullNames,
+          phoneNumber: msg.PhoneNumber,
+          email: msg.Email,
+          message: msg.MessageDescription,
+          status: msg.Status,
+        }));
+        setSupportMessages(formattedMessages);
+      } catch (error) {
+        console.error('Error fetching support messages:', error);
+      }
+    };
+
+    fetchSupportMessages();
+  }, []);
+
   //gettingAlerts
   useEffect(() => {
     const fetchAllAlerts = async () => {
@@ -36,6 +91,7 @@ const AdminDashboard = () => {
     };
     fetchAllAlerts();
   }, []);
+  
   const monthlyPieData = {
     'Jan 2024': [65, 25, 10],
     // Add other months here
@@ -43,29 +99,18 @@ const AdminDashboard = () => {
 
   const [selectedMonthYear, setSelectedMonthYear] = useState('Jan 2024');
 
-  
-  const tableData = [
-    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    { accountNumber: '123456', actionType: 'Active Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    { accountNumber: '123456', actionType: 'Frozen Account', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    { accountNumber: '123456', actionType: 'Deactivated Accound', dateTime: '2024-01-15 14:30', status: 'Frozen', performedBy: 'Admin John' },
-    
-    // Add more table data here
-  ];
-
-  const supportMessages = [
-    { initials: 'J.D.', surname: 'Doe', email: 'jdoe@example.com', dateTime: '2024-01-20 08:30', message: 'Need help with account activation' },
-    { initials: 'M.S.', surname: 'Smith', email: 'msmith@example.com', dateTime: '2024-01-20 09:15', message: 'Unable to login' },
-    { initials: 'A.T.', surname: 'Taylor', email: 'ataylor@example.com', dateTime: '2024-01-20 10:00', message: 'Request for password reset' },
-    { initials: 'R.B.', surname: 'Brown', email: 'rbrown@example.com', dateTime: '2024-01-20 10:45', message: 'Issue with account freezing' },
-    { initials: 'S.L.', surname: 'Lee', email: 'slee@example.com', dateTime: '2024-01-20 11:30', message: 'Account deactivation request' },
-    { initials: 'L.P.', surname: 'Perez', email: 'lperez@example.com', dateTime: '2024-01-20 12:00', message: 'Inquiry about account status' }
-  ];
-
   // This function is passed to the SearchBar to handle search input
   const handleSearch = (searchTerm) => {
-    if (searchTerm === 'frozen') {
+    if (searchTerm === 'all' || searchTerm === 'All') {
+      navigate('/customer-accounts'); // Navigate to Customer Accounts component
+    } else if (searchTerm === 'deactivated' || searchTerm === 'Deactivated') {
+      navigate('/deactivated-accounts'); // Navigate to Deactivated Accounts component
+    } else if (searchTerm === 'restored' || searchTerm === 'Restored') {
+      navigate('/restored-accounts'); // Navigate to Restored Accounts component
+    } else if (searchTerm === 'frozen' || searchTerm === 'Frozen') {
       navigate('/frozen-accounts'); // Navigate to Frozen Accounts component
+    } else if (searchTerm === 'active' || searchTerm === 'Active') {
+      navigate('/active-accounts'); // Navigate to Active Accounts component
     }
     // Add other navigation logic here for other search terms if needed
   };

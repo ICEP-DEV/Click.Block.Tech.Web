@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
-import logo from '../assets/Logo.png';  // Import the logo
+import logo from '../assets/Logo.png'; // Import the logo
 import { useNavigate } from 'react-router-dom'; // to navigate after successful login
-import { BASE_URL } from '../API/API';  // Correct path to import API.js
+import { BASE_URL } from '../API/API'; // Correct path to import API.js
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [loginPin, setLoginPin] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();  // for navigation (replacing useHistory)
+  const navigate = useNavigate(); // for navigation (replacing useHistory)
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,12 +21,15 @@ const Login = () => {
         LoginPin: loginPin,
       });
 
-      // If login is successful, navigate to the admin dashboard
+      // If login is successful, store details in localStorage and navigate
       if (response.data) {
+        const { token, adminDetails } = response.data; // Adjust based on API response structure
+        localStorage.setItem('adminToken', token); // Store admin token
+        localStorage.setItem('adminDetails', JSON.stringify(adminDetails)); // Store admin details
         navigate('/'); // Navigate to admin dashboard
       }
     } catch (err) {
-      console.error('Error details:', err.response);  // Log the entire error response
+      console.error('Error details:', err.response); // Log the entire error response
       setError(err.response?.data?.message || 'An error occurred during login');
     }
   };
@@ -55,7 +58,10 @@ const Login = () => {
           />
           <button type="submit" className="login-button">Login</button>
           <p className="forgot-password">
-            <button onClick={() => alert("Forgot password functionality will be added here.")} className="forgot-password-button">
+            <button
+              onClick={() => alert('Forgot password functionality will be added here.')}
+              className="forgot-password-button"
+            >
               Forgot Password
             </button>
           </p>
@@ -66,8 +72,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
-
-

@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './graph_styles.css';
 import { Line, Doughnut } from 'react-chartjs-2';
 import { Chart, LineElement, PointElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
+import { BASE_URL } from '../API/API';
 
 Chart.register(LineElement, PointElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend);
 
 const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMonthYear }) => {
-  // Line data for Panic Button Usage
-  const lineData = {
+  // State to manage line chart data
+  const [lineData, setLineData] = useState({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [
       {
         label: 'Panic Button Usage',
-        data: [0, 1, 3, 7, 2, 6, 8, 1, 6, 4, 2, 0],
+        data: Array(12).fill(0), // Initially set to zeros
         fill: false,
         borderColor: '#ffffff',
         backgroundColor: '#02457A',
@@ -21,7 +22,39 @@ const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMont
         pointBorderWidth: 2
       }
     ]
-  };
+  });
+
+  // Fetch and process data from the API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/allCustomers/logs`);
+        const data = await response.json();
+
+        // Calculate counts per month
+        const counts = Array(12).fill(0);
+        data.forEach((log) => {
+          const monthIndex = new Date(`${log.year}-${log.month}-01`).getMonth();
+          counts[monthIndex] += log.count;
+        });
+
+        // Update the lineData with new counts
+        setLineData((prevData) => ({
+          ...prevData,
+          datasets: [
+            {
+              ...prevData.datasets[0],
+              data: counts
+            }
+          ]
+        }));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const lineOptions = {
     responsive: true,
@@ -44,7 +77,7 @@ const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMont
     }
   };
 
-  // Doughnut data for Weekly Usage
+  // Doughnut chart data and options remain the same
   const doughnutData = {
     labels: ['Week 1', 'Week 2', 'Week 3'],
     datasets: [
@@ -66,7 +99,7 @@ const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMont
       },
       tooltip: {
         callbacks: {
-          label: function(context) {
+          label: function (context) {
             return `${context.label}: ${context.raw}%`;
           }
         }
@@ -82,7 +115,7 @@ const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMont
         <Line data={lineData} options={lineOptions} />
       </div>
 
-      <div className="graphs-doughnut-chart">
+      {/* <div className="graphs-doughnut-chart">
         <h2 className="graphs-section-heading">Weekly Usage</h2>
         <Doughnut data={doughnutData} options={doughnutOptions} />
         <div className="graphs-month-year-filter">
@@ -92,7 +125,7 @@ const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMont
             ))}
           </select>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
