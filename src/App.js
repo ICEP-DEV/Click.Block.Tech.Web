@@ -8,6 +8,10 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Login from '../src/screens/Login';
 import RealTimeTracking from './screens/realTimeTracking';
 import ProtectedRoute from './screens/components/ProtectedRoute';
+import DeactivatedAccounts from './screens/DeactivateAccounts';
+import ActiveAccounts from './screens/ActiveAccounts';
+import RestoredAccounts from './screens/RestoredAccounts';
+
 
 function App() {
   return (
@@ -20,7 +24,7 @@ function App() {
         <Route path='/customer-accounts' element={<CustomerAccounts />} />
         <Route path='/active-accounts' element={<ActiveAccounts />} />
         <Route path='/deactivated-accounts' element={<DeactivatedAccounts/>} />
-        <Route path='/restored-accounts' element={<ResoredAccounts/>} />
+        <Route path='/restored-accounts' element={<RestoredAccounts/>} />
         <Route path='/live-location' element={<RealTimeTracking />} />
       </Routes>
     </Router>
