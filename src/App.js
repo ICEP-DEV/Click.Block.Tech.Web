@@ -15,6 +15,7 @@ function App() {
         <Route exact path='/' element={<AdminDashboard />} />
         <Route exact path='/Login' element={<Login />} />
         <Route path='/frozen-accounts' element={<FrozenAccounts />} />
+        
         <Route path='/live-location' element={<RealTimeTracking />} />
       </Routes>
     </Router>
