@@ -13,8 +13,18 @@ const FrozenAccounts = () => {
     // This function is passed to the SearchBar to handle search input
     const navigate = useNavigate(); // Use the navigate hook for routing
     const handleSearch = (searchTerm) => {
-      if (searchTerm === 'frozen') {
+      if (searchTerm === 'all' || searchTerm === 'All') {
+        navigate('/customer-accounts'); // Navigate to Customer Accounts component
+      } else if (searchTerm === 'deactivated' || searchTerm === 'Deactivated') {
+        navigate('/deactivated-accounts'); // Navigate to Deactivated Accounts component
+      } else if (searchTerm === 'restored' || searchTerm === 'Restored') {
+        navigate('/restored-accounts'); // Navigate to Restored Accounts component
+      } else if (searchTerm === 'frozen' || searchTerm === 'Frozen') {
         navigate('/frozen-accounts'); // Navigate to Frozen Accounts component
+      } else if (searchTerm === 'active' || searchTerm === 'Active') {
+        navigate('/active-accounts'); // Navigate to Active Accounts component
+      } else if (searchTerm === 'home' || searchTerm === 'Home') {
+        navigate('/'); // Navigate to Active Accounts component
       }
       // Add other navigation logic here for other search terms if needed
     };
@@ -24,7 +34,7 @@ const FrozenAccounts = () => {
     <div className="dashboard-container">
       <ProfileHeader />
       <SearchBar onSearch={handleSearch} /> {/* Pass handleSearch as a prop */}
-      <h2 className="dashboard-heading">Frozen Accounts</h2>
+      <h2 className="dashboard-heading">FROZEN ACCOUNTS</h2>
       <table className="data-table">
         <thead>
           <tr>

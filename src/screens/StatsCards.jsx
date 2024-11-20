@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Importing axios
 import { FaUsers } from 'react-icons/fa'; // Importing an icon library for user icons
+import { useNavigate } from 'react-router-dom'; // Importing useNavigate for navigation
 import './statscard.css';
 import { BASE_URL } from '../API/API';
+
 const StatsCards = () => {
   // State to hold the fetched data
   const [stats, setStats] = useState({
@@ -13,9 +15,8 @@ const StatsCards = () => {
     restoredAccounts: 0,
   });
 
-
-
   const [loading, setLoading] = useState(true); // Loading state
+  const navigate = useNavigate(); // Hook for navigation
 
   // Fetch data from the API
   useEffect(() => {
@@ -65,27 +66,27 @@ const StatsCards = () => {
 
   return (
     <div className="cards-container">
-      <div className="card">
+      <div className="card" onClick={() => navigate('/customer-accounts')}> {/* Navigate to CustomerAccounts page */}
         <FaUsers className="card-icon" />
         <p className="card-value">{stats.totalAccounts}</p>
         <h3 style={{ color: 'white' }}>Customer Accounts</h3>
       </div>
-      <div className="card">
+      <div className="card" onClick={() => navigate('/active-accounts')}>
         <FaUsers className="card-icon" />
         <p className="card-value active-value">{stats.activeAccounts}</p>
         <h3 style={{ color: 'white' }}>Active Accounts</h3>
       </div>
-      <div className="card">
+      <div className="card" onClick={() => navigate('/frozen-accounts')}>
         <FaUsers className="card-icon" />
         <p className="card-value frozen-value">{stats.frozenAccounts}</p>
         <h3 style={{ color: 'white' }}>Frozen Accounts</h3>
       </div>
-      <div className="card">
+      <div className="card" onClick={() => navigate('/deactivated-accounts')}>
         <FaUsers className="card-icon" />
         <p className="card-value deactivated-value">{stats.deactivatedAccounts}</p>
         <h3 style={{ color: 'white' }}>Deactivated Accounts</h3>
       </div>
-      <div className="card">
+      <div className="card" onClick={() => navigate('/restored-accounts')}>
         <FaUsers className="card-icon" />
         <p className="card-value restored-value">{stats.restoredAccounts}</p>
         <h3 style={{ color: 'white' }}>Restored Accounts</h3>

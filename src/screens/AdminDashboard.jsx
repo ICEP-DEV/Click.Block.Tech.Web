@@ -101,8 +101,16 @@ const AdminDashboard = () => {
 
   // This function is passed to the SearchBar to handle search input
   const handleSearch = (searchTerm) => {
-    if (searchTerm === 'frozen') {
+    if (searchTerm === 'all' || searchTerm === 'All') {
+      navigate('/customer-accounts'); // Navigate to Customer Accounts component
+    } else if (searchTerm === 'deactivated' || searchTerm === 'Deactivated') {
+      navigate('/deactivated-accounts'); // Navigate to Deactivated Accounts component
+    } else if (searchTerm === 'restored' || searchTerm === 'Restored') {
+      navigate('/restored-accounts'); // Navigate to Restored Accounts component
+    } else if (searchTerm === 'frozen' || searchTerm === 'Frozen') {
       navigate('/frozen-accounts'); // Navigate to Frozen Accounts component
+    } else if (searchTerm === 'active' || searchTerm === 'Active') {
+      navigate('/active-accounts'); // Navigate to Active Accounts component
     }
     // Add other navigation logic here for other search terms if needed
   };
