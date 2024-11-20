@@ -1,4 +1,4 @@
-/* Styles for the full-screen container with a gradient background */
+/* Full-screen container with a gradient background */
 .fullscreen-container {
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   height: 100vh;
   background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
   padding: 20px;
-  color: white; /* Adjust text color for better contrast */
+  color: #02457A; 
 }
 
 /* Logo styling */
@@ -21,29 +21,35 @@ button {
   background: linear-gradient(90deg, #1E5E98 0%, #0F0C29 100%);
   color: white;
   border: none;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 10px;
+  padding: 10px 15px;
+  border-radius: 0px;
+  font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background: linear-gradient(90deg, #0F0C29 0%, #1E5E98 100%);
+  transform: scale(1.05);
 }
 
 /* Transaction list styling */
 ul {
   list-style-type: none;
   padding: 0;
+  width: 100%;
+  max-width: 600px; 
+  margin: 20px auto; 
 }
 
 li {
-  background-color: #f1f3f6;
-  padding: 10px;
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(10px); 
+  color: #02457A; 
+  padding: 15px;
   margin: 10px 0;
   border-radius: 8px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 li p {
@@ -58,8 +64,10 @@ li p strong {
 /* Responsive styles */
 @media (max-width: 600px) {
   button {
-      font-size: 14px;
-      padding: 10px;
+      font-size: 12px;
+      padding: 3px 10px;
+      
+
   }
 
   li p {
@@ -67,6 +75,42 @@ li p strong {
   }
 
   .logo {
-      width: 100px; /* Smaller logo for mobile */
+      width: 220px; /* Smaller logo for mobile */
   }
 }
+/* Form container styling */
+.transaction-form {
+  display: flex;
+  flex-direction: column; 
+  gap: 10px;
+  width: 100%;
+  max-width: 400px; 
+  margin: auto;
+  margin-top: 5px;
+}
+
+/* Label styling */
+.transaction-form label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px; 
+  color: white; 
+}
+
+/* Input and select box styling */
+.transaction-form input,
+.transaction-form select {
+  width: 100%;
+  padding: 3px;
+  border: 2px solid #02457A;
+  border-radius: 0px;
+  font-size: 14px;
+  background: #f9f9f9;
+}
+
+/* Button alignment */
+.transaction-form button {
+  align-self: center; /* Center the button horizontally */
+  width: fit-content;
+}
+

@@ -18,9 +18,19 @@ const parseCurrency = (value) => {
 const TransactionForm = ({ onSubmit }) => {
   const [cardNumber, setCardNumber] = useState('');
   const [pin, setPin] = useState('');
+  const [maskedPin, setMaskedPin] = useState('');
   const [transactionType, setTransactionType] = useState('cash transfer');
   const [amount, setAmount] = useState('');
 
+  const handlePinChange = (event) => {
+    const input = event.target.value;
+
+    
+    if (input.length <= 5 && /^[0-9]*$/.test(input)) {
+      setPin(input); // Store the actual PIN
+      setMaskedPin('*'.repeat(input.length)); // Masked display as asterisks
+    }
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const parsedAmount = parseCurrency(amount);
@@ -34,6 +44,7 @@ const TransactionForm = ({ onSubmit }) => {
     // Reset form fields
     setCardNumber('');
     setPin('');
+    setMaskedPin('');
     setTransactionType('cash transfer');
     setAmount('');
   };
@@ -47,52 +58,49 @@ const TransactionForm = ({ onSubmit }) => {
 
   return (
     <form className="transaction-form" onSubmit={handleSubmit}>
-      <div>
-        <label>Input Card Number:</label>
-        <input
-          type="text"
-          value={cardNumber}
-          onChange={(event) => setCardNumber(event.target.value)}
-          maxLength="12"
-        />
-      </div>
-      <br />
-      <div>
-        <label>Input PIN:</label>
-        <input
-          type="password"
-          value={pin}
-          onChange={(event) => setPin(event.target.value)}
-          maxLength="5"
-        />
-      </div>
-      <br />
-      <div>
-        <label>Transaction Type:</label>
-        <select
-          value={transactionType}
-          onChange={(event) => setTransactionType(event.target.value)}
-        >
-          <option value="cash transfer">Cash Transfer</option>
-          <option value="eft">EFT</option>
-          <option value="payment order">Payment Order</option>
-          <option value="online purchase">Online Purchase</option>
-          <option value="cash payment">Cash Payment</option>
-        </select>
-      </div>
-      <br />
-      <div>
-        <label>Amount:</label>
-        <input
-          type="text" // Change type to text for better formatting control
-          value={formatCurrency(amount)} // Format as currency for display
-          onChange={handleAmountChange} // Use custom change handler
-          placeholder="R0.00"
-        />
-      </div>
-      <br />
-      <button type="submit">Simulate Transaction</button>
-    </form>
+    <div>
+      <label>Input Card Number:</label>
+      <input
+        type="text"
+        value={cardNumber}
+        onChange={(event) => setCardNumber(event.target.value)}
+        maxLength="12"
+      />
+    </div>
+    <div>
+      <label>Input PIN:</label>
+      <input
+        type="password"
+        value={pin}
+        onChange={(event) => setPin(event.target.value)}
+        maxLength="5"
+      />
+    </div>
+    <div>
+      <label>Transaction Type:</label>
+      <select
+        value={transactionType}
+        onChange={(event) => setTransactionType(event.target.value)}
+      >
+        <option value="cash transfer">Cash Transfer</option>
+        <option value="eft">EFT</option>
+        <option value="payment order">Payment Order</option>
+        <option value="online purchase">Online Purchase</option>
+        <option value="cash payment">Cash Payment</option>
+      </select>
+    </div>
+    <div>
+      <label>Amount:</label>
+      <input
+        type="text"
+        value={formatCurrency(amount)}
+        onChange={handleAmountChange}
+        placeholder="R0.00"
+      />
+    </div>
+    <button type="submit">Simulate Transaction</button>
+  </form>
+  
   );
 };
 
