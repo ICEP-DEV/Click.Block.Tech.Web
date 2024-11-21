@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css';
+import './Login.css'; // Updated to match the new CSS styling
 import logo from '../assets/Logo.png'; // Import the logo
 import { useNavigate } from 'react-router-dom'; // to navigate after successful login
 import { BASE_URL } from '../API/API'; // Correct path to import API.js
 
-const Login = () => {
+const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [loginPin, setLoginPin] = useState('');
   const [error, setError] = useState('');
@@ -35,40 +35,42 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <img src={logo} alt="Nexis Logo" className="logo" />
-        <h2 className="welcome-text">WELCOME</h2>
-        <p className="login-prompt">Please login to admin dashboard</p>
-        {error && <p className="error-message">{error}</p>} {/* Display error message */}
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Email"
-            className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="input-field"
-            value={loginPin}
-            onChange={(e) => setLoginPin(e.target.value)}
-          />
-          <button type="submit" className="login-button">Login</button>
-          <p className="forgot-password">
-            <button
-              onClick={() => alert('Forgot password functionality will be added here.')}
-              className="forgot-password-button"
-            >
-              Forgot Password
-            </button>
-          </p>
-        </form>
+    <div className="admin-login-page">
+      <div className="admin-login-container">
+        <div className="admin-login-box">
+          <img src={logo} alt="Nexis Logo" className="admin-logo" />
+          <h2 className="admin-welcome-text">WELCOME</h2>
+          <p className="admin-login-prompt">Please login to admin dashboard</p>
+          {error && <p className="error-message">{error}</p>} {/* Display error message */}
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Email"
+              className="admin-input-field"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="admin-input-field"
+              value={loginPin}
+              onChange={(e) => setLoginPin(e.target.value)}
+            />
+            <button type="submit" className="admin-login-button">Login</button>
+            <p className="admin-forgot-password">
+              <button
+                onClick={() => alert('Forgot password functionality will be added here.')}
+                className="admin-forgot-password-button"
+              >
+                Forgot Password
+              </button>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

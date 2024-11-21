@@ -1,105 +1,108 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    height: 100%;
-    background: url('../assets/backgroundPic.jpeg');
-    background-size: cover;
-  }
-  
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; 
-    padding-top: 5vh; /* Adjusts the top spacing */
-    padding-bottom: 5vh;
-    height: 20px;
-    width: 100vw;
-    
-  }
-  
-  .login-box {
-    background:#07315ad2;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    width: 900px;
-    text-align: center;
-    color: #ffffff;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-    margin-top: 7rem;
-  }
-  
-  .logo {
-    width: 350px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-     margin-bottom: 0.1rem;
-  }
-  
-  .welcome-text {
-    font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
+.admin-login-page {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  background-image: url('https://cdn.pixabay.com/photo/2015/04/23/21/59/hot-air-balloon-736879_1280.jpg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.admin-login-box {
+  background: #07315abf;
+  padding: 1.5rem;
+  border-radius: 16px;
+  width: 550px;
+  text-align: center;
   color: #ffffff;
-  }
-  
-  .login-prompt {
-    font-size: 1rem;
-    color: #b0c4de;
-    margin-bottom: 2rem;
-  }
-  
-  .input-field {
-    width: 630px;
-    padding: 0.8rem;
-    margin: 0.5rem 0;
-    border: 1px solid #b0c4de;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: #ffffff; 
-    color: #1C5288; 
-  }
-  
-  .input-field::placeholder {
-    color: #1C5288; 
-    opacity: 0.6;
-  }
-  
-  .login-button {
-    width: 30%;
-    padding: 0.8rem;
-    background-color: #1C5288;
-    border: none;
-    border-radius: 3px;
-    font-size: 1rem;
-    color: #ffffff;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 1rem;
-  }
-  
-  .login-button:hover {
-    background-color: #0073e6;
-  }
-  
-  .forgot-password {
-    margin-top: 1rem;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.admin-logo {
+  width: 250px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.admin-welcome-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  color: #ffffff;
+}
+
+.admin-login-prompt {
   font-size: 0.9rem;
   color: #b0c4de;
-  }
+  margin-bottom: 1.5rem;
+}
+
+.admin-input-field {
+  width: 75%;
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  border: 1px solid #b0c4de;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #1C5288;
+}
+
+.admin-input-field::placeholder {
+  color: #1C5288;
+  opacity: 0.6;
+}
+
+.admin-login-button {
+  width: 30%;
+  padding: 0.5rem;
+  background-color:#1C5288;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color:white;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
   
-  .forgot-password a {
-    color: #b0c4de;
-    text-decoration: none;
-  }
-  
-  .forgot-password a:hover {
-    text-decoration: underline;
-  }
-  .forgot-password-button {
-    background: none;
-    border: none;
-    color: #b0c4de;
-    text-decoration: underline;
-    cursor: pointer;
-  }
+}
+
+.admin-login-button:hover {
+  background-color:#1c528800;
+}
+
+.admin-forgot-password {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #b0c4de;
+}
+
+.admin-forgot-password a {
+  color: #b0c4de;
+  text-decoration: none;
+}
+
+.admin-forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.admin-forgot-password-button {
+  background: none;
+  border: none;
+  color: #b0c4de;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
