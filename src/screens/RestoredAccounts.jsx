@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import the hook for navigatio
 import SearchBar from './SearchBar';
 import ProfileHeader from './ProfileHeader';
 
-const ResoredAccounts = () => {
+const RestoredAccounts = () => {
   const ResoredAccounts = [
     { email: 'kjmoatshe@gmail.com', name: 'KJ Moatshe', registrationDate: '09/10/2024', status: 'Active', lastLogin: 'Today 11:04 am' },
     { email: 'bmwalee@gmail.com', name: 'B Mwale', registrationDate: '12/10/2024', status: 'Active', lastLogin: 'Today 09:30 am' },
@@ -61,4 +61,4 @@ const ResoredAccounts = () => {
   );
 };
 
-export default ResoredAccounts;
+export default RestoredAccounts;

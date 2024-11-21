@@ -1,2 +1,2 @@
-const BASE_URL = "http://10.7.32.64:5000/api/";
+const BASE_URL = "http://192.168.23.248:5000/api/";
 export {BASE_URL};
