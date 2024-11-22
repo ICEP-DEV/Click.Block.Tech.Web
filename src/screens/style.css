@@ -1,3 +1,13 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(22, 20, 24);
+  color: #eee;
+  user-select: none;
+}
+
 /* Header Styling */
 .top-header {
   display: flex;
@@ -11,53 +21,160 @@
   right: 0;
   z-index: 1000;
 }
-.resolve_panic_alert_btnContainer button{
+
+.profile-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.icon-img {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.profile-card {
+  position: absolute;
+  top: 60px;
+  left: -4px;
+  width: 300px;
+  background-color: #1c528830;
+  border: 1px solid #ffffff22;
+  border-radius: 0.7rem;
+  box-shadow: 0 7px 20px 5px #020405cc;
+  overflow: hidden;
+  transition: 0.5s all;
+  z-index: 2000; /* Increased z-index to ensure the card shows above the header */
+}
+
+.profile-card:hover {
+  box-shadow: 0 0 20px 10px #e3e3e31c;
+  transform: scale(1.05);
+  filter: brightness(1.3);
+}
+
+.card-main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.tokenImage {
+  width: 200px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  cursor: pointer;
+  display: block;
+  object-fit: cover;
+  text-align: center;
+}
+
+.description {
+  margin: 0.5rem 0;
+  color: #a89ec9;
+}
+
+.tokenInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.price,
+.duration {
+  display: flex;
+  align-items: center;
+  color: #ee83e5;
+  font-weight: 700;
+}
+
+.duration {
+  color: #a89ec9;
+}
+
+ins {
+  text-decoration: none;
+  margin-right: 0.5rem;
+}
+
+hr {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #88888855;
+  margin-top: 0;
+}
+
+.creator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.logout-button {
+  background-color:white;
+  color:#1C5288;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color:#18232f;
+}
+
+.app-logo {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.center-logo-img {
+  max-width: 200px;
+  height: auto;
+  margin: -70px;
+}
+
+.notification-bell {
+  cursor: pointer;
+}
+
+/* Added styles for resolve panic alert and live location buttons */
+.resolve_panic_alert_btnContainer button {
   width: 150px;
   height: 35px;
   border-radius: 15px;
   font-weight: bold;
   color: #02457A;
 }
-.alert_liveLocation_btn button{
+
+.alert_liveLocation_btn button {
   width: 100px;
   height: 35px;
   border-radius: 15px;
   font-weight: bold;
   color: #02457A;
-
 }
-.resolve_panic_alert_btnContainer
-{
+
+.resolve_panic_alert_btnContainer {
   padding-left: 15px;
 }
-.alert_liveLocation_btn{
- padding-left: 15px;
+
+.alert_liveLocation_btn {
+  padding-left: 15px;
 }
-.viewLiveLocation_tableData{
+
+.viewLiveLocation_tableData {
   width: 150px;
 }
-.resolve_panicAlert_td{
-  width: 50px;
-}
-.icon-img {
-  width: 32px; /* Adjust size as needed */
-  height: 32px;
-  object-fit: contain;
-  cursor: pointer;
-}
 
-.profile-icon-img,
-.notification-icon-img {
+.resolve_panicAlert_td {
   width: 50px;
-  height: auto;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.center-logo-img {
-  width: 200px;
-  height: auto;
-  margin: -70px;
 }
 
 /* Form Group Styling */
