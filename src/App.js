@@ -18,13 +18,13 @@ function App() {
     <Router>
       <Routes>
       <Route exact path='/' element={<ProtectedRoute> <AdminDashboard /></ProtectedRoute>} />
-        <Route exact path='/Login' element={<Login />} />
-        <Route path='/frozen-accounts' element={<FrozenAccounts />} />
-        <Route path='/customer-accounts' element={<CustomerAccounts />} />
-        <Route path='/active-accounts' element={<ActiveAccounts />} />
-        <Route path='/deactivated-accounts' element={<DeactivatedAccounts/>} />
-        <Route path='/restored-accounts' element={<RestoredAccounts/>} />
-        <Route path='/live-location' element={<RealTimeTracking />} />
+        <Route exact path='/Login' element={<ProtectedRoute> <Login /> </ProtectedRoute> } />
+        <Route path='/frozen-accounts' element={<ProtectedRoute> <FrozenAccounts /> </ProtectedRoute> } />
+        <Route path='/customer-accounts' element={<ProtectedRoute> <CustomerAccounts /> </ProtectedRoute> } />
+        <Route path='/active-accounts' element={<ProtectedRoute> <ActiveAccounts /> </ProtectedRoute> } />
+        <Route path='/deactivated-accounts' element={<ProtectedRoute> <DeactivatedAccounts/> </ProtectedRoute> } />
+        <Route path='/restored-accounts' element={<ProtectedRoute> <RestoredAccounts/> </ProtectedRoute> } />
+        <Route path='/live-location' element={<ProtectedRoute> <RealTimeTracking /> </ProtectedRoute> } />
       </Routes>
     </Router>
   );
