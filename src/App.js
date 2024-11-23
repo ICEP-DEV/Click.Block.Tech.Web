@@ -17,8 +17,8 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route exact path='/' element={<ProtectedRoute> <AdminDashboard /></ProtectedRoute>} />
-        <Route exact path='/Login' element={<ProtectedRoute> <Login /> </ProtectedRoute> } />
+      <Route exact path='/' element={ <Login />} />
+        <Route exact path='/dashboard' element={<ProtectedRoute>  <AdminDashboard /></ProtectedRoute> } />
         <Route path='/frozen-accounts' element={<ProtectedRoute> <FrozenAccounts /> </ProtectedRoute> } />
         <Route path='/customer-accounts' element={<ProtectedRoute> <CustomerAccounts /> </ProtectedRoute> } />
         <Route path='/active-accounts' element={<ProtectedRoute> <ActiveAccounts /> </ProtectedRoute> } />

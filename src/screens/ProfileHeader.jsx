@@ -23,7 +23,7 @@ const ProfileHeader = () => {
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminDetails');
     // Navigate back to the login page
-    navigate('/login');
+    navigate('/');
   };
 
   const toggleProfileCard = () => {
