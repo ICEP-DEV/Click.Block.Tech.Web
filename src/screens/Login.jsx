@@ -12,21 +12,25 @@ const AdminLogin = () => {
   const navigate = useNavigate(); // for navigation (replacing useHistory)
 
   const handleLogin = async (e) => {
+    
     e.preventDefault();
     setError(''); // Reset error state
 
     try {
+     
       const response = await axios.post(`${BASE_URL}admin/login`, {
         Email: email,
         LoginPin: loginPin,
       });
-
+      const adminData = response.data;
       // If login is successful, store details in localStorage and navigate
-      if (response.data) {
-        const { token, adminDetails } = response.data; // Adjust based on API response structure
+      if (adminData) {
+        const token = adminData.token;
+        const adminDetails = adminData.admin;
+        console.log(JSON.stringify(adminDetails));
         localStorage.setItem('adminToken', token); // Store admin token
-        localStorage.setItem('adminDetails', JSON.stringify(adminDetails)); // Store admin details
-        navigate('/'); // Navigate to admin dashboard
+        localStorage.setItem('adminDetails', JSON.stringify(adminDetails)); 
+        navigate('/dashboard'); // Navigate to admin dashboard
       }
     } catch (err) {
       console.error('Error details:', err.response); // Log the entire error response
