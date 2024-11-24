@@ -41,7 +41,7 @@ const CustomerAccounts = () => {
     } else if (searchTerm.toLowerCase() === 'active') {
       navigate('/active-accounts');
     } else if (searchTerm.toLowerCase() === 'home') {
-      navigate('/');
+      navigate('/dashboard');
     }
   };
 

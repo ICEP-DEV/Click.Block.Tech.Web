@@ -47,7 +47,7 @@ const FrozenAccounts = () => {
     } else if (term === 'active') {
       navigate('/active-accounts');
     } else if (term === 'home') {
-      navigate('/');
+      navigate('/dashboard');
     }
     // Add other navigation logic here for other search terms if needed
   };

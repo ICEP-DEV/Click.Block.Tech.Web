@@ -47,7 +47,7 @@ const RestoredAccounts = () => {
     } else if (term === 'active') {
       navigate('/active-accounts'); // Navigate to Active Accounts component
     } else if (term === 'home') {
-      navigate('/'); // Navigate to Home component
+      navigate('/dashboard'); // Navigate to Home component
     }
     // Add other navigation logic here for other search terms if needed
   };
