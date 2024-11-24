@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './graph_styles.css';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  LineElement,
-  PointElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Line, Doughnut } from 'react-chartjs-2';
+import { Chart, LineElement, PointElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
 import { BASE_URL } from '../API/API';
 
-ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend);
+Chart.register(LineElement, PointElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend);
 
-const PanicButtonFeature = () => {
+const PanicButtonFeature = ({ monthlyPieData, selectedMonthYear, setSelectedMonthYear }) => {
   // State to manage line chart data
   const [lineData, setLineData] = useState({
-    labels: [], // Initialize with empty labels
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [
       {
         label: 'Panic Button Usage',
-        data: [],
+        data: Array(12).fill(0), // Initially set to zeros
         fill: false,
         borderColor: '#ffffff',
         backgroundColor: '#02457A',
@@ -36,59 +28,26 @@ const PanicButtonFeature = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/allCustomers/logs`);
+        const response = await fetch(`${BASE_URL}/allCustomers/logs`); // Fixed the template literal usage
         const data = await response.json();
 
-        // Process data to calculate counts per month
-        const countsPerMonth = {};
-
+        // Calculate counts per month
+        const counts = Array(12).fill(0);
         data.forEach((log) => {
-          const date = new Date(log.date);
-          const month = date.toLocaleString('default', { month: 'short' }); // e.g., 'Jan'
-          if (!countsPerMonth[month]) {
-            countsPerMonth[month] = 0;
-          }
-          countsPerMonth[month] += log.count;
+          const monthIndex = new Date(`${log.year}-${log.month}-01`).getMonth(); // Corrected template literal usage
+          counts[monthIndex] += log.count;
         });
 
-        // Prepare labels and counts arrays in order
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const labels = [];
-        const counts = [];
-
-         {/* <div className="graphs-doughnut-chart">
-        <h2 className="graphs-section-heading">Weekly Usage</h2>
-        <Doughnut data={doughnutData} options={doughnutOptions} />
-        <div className="graphs-month-year-filter">
-          <select id="month-year" value={selectedMonthYear} onChange={(e) => setSelectedMonthYear(e.target.value)}>
-            {Object.keys(monthlyPieData).map((monthYear) => (
-              <option key={monthYear} value={monthYear}>{monthYear}</option>
-            ))}
-          </select>
-        </div>
-      </div> */}
-
-        months.forEach((month) => {
-          labels.push(month);
-          counts.push(countsPerMonth[month] || 0);
-        });
-
-        // Update the lineData with new labels and counts
-        setLineData({
-          labels: labels,
+        // Update the lineData with new counts
+        setLineData((prevData) => ({
+          ...prevData,
           datasets: [
             {
-              label: 'Panic Button Usage',
+              ...prevData.datasets[0],
               data: counts,
-              fill: false,
-              borderColor: '#ffffff',
-              backgroundColor: '#02457A',
-              tension: 0.3,
-              pointBackgroundColor: '#ffffff',
-              pointBorderWidth: 2,
             },
           ],
-        });
+        }));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -104,16 +63,6 @@ const PanicButtonFeature = () => {
         display: false,
       },
     },
-    elements: {
-      line: {
-        tension: 0.3,
-        borderWidth: 2,
-      },
-      point: {
-        radius: 3,
-        hitRadius: 10,
-      },
-    },
     scales: {
       x: {
         ticks: { color: '#ffffff' },
@@ -122,9 +71,41 @@ const PanicButtonFeature = () => {
       y: {
         ticks: { color: '#ffffff', stepSize: 2 },
         beginAtZero: true,
+        max: 10,
         grid: { color: 'rgba(255, 255, 255, 0.2)' },
       },
     },
+  };
+
+  // Doughnut chart data and options remain the same
+  const doughnutData = {
+    labels: ['Week 1', 'Week 2', 'Week 3'],
+    datasets: [
+      {
+        label: 'Weekly Usage',
+        data: [0, 45, 55],
+        backgroundColor: ['#00407A', '#02599B', '#0491D4'],
+        hoverOffset: 4,
+        borderWidth: 0,
+      },
+    ],
+  };
+
+  const doughnutOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return `${context.label}: ${context.raw}%`; // Corrected template literal usage
+          },
+        },
+      },
+    },
+    cutout: '70%',
   };
 
   return (
@@ -133,6 +114,24 @@ const PanicButtonFeature = () => {
         <h2 className="graphs-section-heading">Panic Alerts Usage</h2>
         <Line data={lineData} options={lineOptions} />
       </div>
+
+      {/* <div className="graphs-doughnut-chart">
+        <h2 className="graphs-section-heading">Weekly Usage</h2>
+        <Doughnut data={doughnutData} options={doughnutOptions} />
+        <div className="graphs-month-year-filter">
+          <select
+            id="month-year"
+            value={selectedMonthYear}
+            onChange={(e) => setSelectedMonthYear(e.target.value)}
+          >
+            {Object.keys(monthlyPieData).map((monthYear) => (
+              <option key={monthYear} value={monthYear}>
+                {monthYear}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div> */}
     </div>
   );
 };
