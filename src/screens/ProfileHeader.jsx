@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // For navigation
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 import profileIcon from '../assets/Homepage/account.png';
 import notification from '../assets/Homepage/notification.png';
 import appLogo from '../assets/Logo.png';
-import { BASE_URL } from '../API/API'; // Ensure correct import for BASE_URL
+import { BASE_URL } from '../API/API';
 
 const ProfileHeader = () => {
   const navigate = useNavigate();
@@ -15,19 +15,24 @@ const ProfileHeader = () => {
   useEffect(() => {
     const fetchAdminDetails = async () => {
       try {
-        // Fetch admin ID from localStorage or another source
         const storedAdminDetails = localStorage.getItem('adminDetails');
-        const adminID = storedAdminDetails ? JSON.parse(storedAdminDetails).adminID : null;
+        const adminID = storedAdminDetails ? JSON.parse(storedAdminDetails)._AdminID : null;
 
         if (adminID) {
-          // Make API call to fetch admin details
-          const response = await axios.get(`${BASE_URL}/admin/${adminID}`);
-          const { _FirstName, _LastName } = response.data; // Use the correct response keys
+          const token = localStorage.getItem('adminToken');
+          const response = await axios.get(`${BASE_URL}/admin/${adminID}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const { _FirstName, _LastName } = response.data;
           setAdminDetails({ name: _FirstName, surname: _LastName });
+        } else {
+          console.error('No admin ID found in localStorage');
         }
       } catch (err) {
-        console.error('Error fetching admin details:', err);
-        setAdminDetails({ name: 'Unknown', surname: 'User' }); // Fallback for errors
+        console.error('Error fetching admin details:', err.response ? err.response.data : err);
+        setAdminDetails({ name: 'Unknown', surname: 'User' });
       }
     };
 
@@ -35,10 +40,8 @@ const ProfileHeader = () => {
   }, []);
 
   const handleLogout = () => {
-    // Clear localStorage
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminDetails');
-    // Navigate back to the login page
     navigate('/');
   };
 
