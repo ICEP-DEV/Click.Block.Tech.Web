@@ -7,8 +7,8 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Login from '../src/screens/Login';
 import RealTimeTracking from './screens/realTimeTracking';
-import ProtectedRoute from './screens/components/ProtectedRoute';
 import DeactivatedAccounts from './screens/DeactivateAccounts';
+import ProtectedRoute from './screens/components/ProtectedRoute';
 import ActiveAccounts from './screens/ActiveAccounts';
 import RestoredAccounts from './screens/RestoredAccounts';
 
