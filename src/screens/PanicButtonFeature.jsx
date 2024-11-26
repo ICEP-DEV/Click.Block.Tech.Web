@@ -86,34 +86,35 @@ const PanicButtonFeature = () => {
   }, []);
 
   const lineOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
+  responsive: true,
+  maintainAspectRatio: false, // Allows the chart to adapt to the container's size
+  plugins: {
+    legend: {
+      display: false,
     },
-    elements: {
-      line: {
-        tension: 0.3,
-        borderWidth: 2,
-      },
-      point: {
-        radius: 3,
-        hitRadius: 10,
-      },
+  },
+  elements: {
+    line: {
+      tension: 0.3,
+      borderWidth: 2,
     },
-    scales: {
-      x: {
-        ticks: { color: '#ffffff' },
-        grid: { display: false },
-      },
-      y: {
-        ticks: { color: '#ffffff', stepSize: 2 },
-        beginAtZero: true,
-        grid: { color: 'rgba(255, 255, 255, 0.2)' },
-      },
+    point: {
+      radius: 3,
+      hitRadius: 10,
     },
-  };
+  },
+  scales: {
+    x: {
+      ticks: { color: '#ffffff' },
+      grid: { display: false },
+    },
+    y: {
+      ticks: { color: '#ffffff', stepSize: 2 },
+      beginAtZero: true,
+      grid: { color: 'rgba(255, 255, 255, 0.2)' },
+    },
+  },
+};
 
   return (
     <div className="graphs-panic-feature-section">
