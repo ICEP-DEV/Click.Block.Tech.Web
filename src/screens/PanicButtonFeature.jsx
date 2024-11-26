@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './graph_styles.css';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  LineElement,
-  PointElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Chart, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
 import { BASE_URL } from '../API/API';
 
-ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend);
+Chart.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const PanicButtonFeature = () => {
   // State to manage line chart data
   const [lineData, setLineData] = useState({
-    labels: [], // Initialize with empty labels
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [
       {
-        label: 'Panic Button Usage',
-        data: [],
+        label: 'Unique Panic Button Users',
+        data: Array(12).fill(0), // Initially set to zeros for 12 months
         fill: false,
         borderColor: '#ffffff',
         backgroundColor: '#02457A',
@@ -39,87 +31,75 @@ const PanicButtonFeature = () => {
         const response = await fetch(`${BASE_URL}/alertPinLogs`);
         const data = await response.json();
 
-        // Process data to calculate counts per month
-        const countsPerMonth = {};
+        // Initialize counts for each month
+        const counts = Array(12).fill(0);
 
-        data.forEach((log) => {
-          const date = new Date(log.date);
-          const month = date.toLocaleString('default', { month: 'short' }); // e.g., 'Jan'
-          if (!countsPerMonth[month]) {
-            countsPerMonth[month] = 0;
+        // Use a map to track unique IDs for each month
+        const uniqueIdsPerMonth = Array.from({ length: 12 }, () => new Set());
+
+        // Process the alerts
+        data.forEach((alert) => {
+          if (alert["date"] && alert["Id Number"]) {
+            const date = new Date(`${alert.year}-${alert.date.split(' ')[1]}-01`); // Construct a date using month name
+            const monthIndex = date.getMonth(); // Get month index (0-11)
+
+            // Add unique Id Number to the corresponding month's set
+            uniqueIdsPerMonth[monthIndex].add(alert["Id Number"]);
           }
-          countsPerMonth[month] += log.count;
         });
 
-        // Prepare labels and counts arrays in order
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const labels = [];
-        const counts = [];
-
-        months.forEach((month) => {
-          labels.push(month);
-          counts.push(countsPerMonth[month] || 0);
+        // Calculate unique counts for each month
+        uniqueIdsPerMonth.forEach((idSet, monthIndex) => {
+          counts[monthIndex] = idSet.size; // Use the size of the set
         });
 
-        // Update the lineData with new labels and counts
-        setLineData({
-          labels: labels,
+        console.log('Unique user counts per month:', counts);
+
+        // Update the lineData with new counts
+        setLineData((prevData) => ({
+          ...prevData,
           datasets: [
             {
-              label: 'Panic Button Usage',
-              data: counts,
-              fill: false,
-              borderColor: '#ffffff',
-              backgroundColor: '#02457A',
-              tension: 0.3,
-              pointBackgroundColor: '#ffffff',
-              pointBorderWidth: 2,
+              ...prevData.datasets[0],
+              data: counts, // Set the monthly counts
             },
           ],
-        });
+        }));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, []); // Run once when the component mounts
 
   const lineOptions = {
-  responsive: true,
-  maintainAspectRatio: false, // Allows the chart to adapt to the container's size
-  plugins: {
-    legend: {
-      display: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
     },
-  },
-  elements: {
-    line: {
-      tension: 0.3,
-      borderWidth: 2,
+    scales: {
+      x: {
+        ticks: { color: '#ffffff' },
+        grid: { display: false },
+      },
+      y: {
+        ticks: {
+          color: '#ffffff',
+          stepSize: 1, // Step size for Y-axis
+        },
+        beginAtZero: true,
+        grid: { color: 'rgba(255, 255, 255, 0.2)' },
+      },
     },
-    point: {
-      radius: 3,
-      hitRadius: 10,
-    },
-  },
-  scales: {
-    x: {
-      ticks: { color: '#ffffff' },
-      grid: { display: false },
-    },
-    y: {
-      ticks: { color: '#ffffff', stepSize: 2 },
-      beginAtZero: true,
-      grid: { color: 'rgba(255, 255, 255, 0.2)' },
-    },
-  },
-};
+  };
 
   return (
     <div className="graphs-panic-feature-section">
       <div className="graphs-line-chart">
-        <h2 className="graphs-section-heading">Panic Alerts Usage</h2>
+        <h2 className="graphs-section-heading">Panic Alert Usage</h2>
         <Line data={lineData} options={lineOptions} />
       </div>
     </div>
