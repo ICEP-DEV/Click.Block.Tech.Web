@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
+import './noti.css'; // Import the new noti.css for notification styles
 import profileIcon from '../assets/Homepage/account.png';
 import notification from '../assets/Homepage/notification.png';
 import appLogo from '../assets/Logo.png';
@@ -10,7 +11,9 @@ import { BASE_URL } from '../API/API';
 const ProfileHeader = () => {
   const navigate = useNavigate();
   const [isProfileCardVisible, setProfileCardVisible] = useState(false);
+  const [isNotificationPanelVisible, setNotificationPanelVisible] = useState(false);
   const [adminDetails, setAdminDetails] = useState({ name: '', surname: '' });
+  const [alerts, setAlerts] = useState([]);
 
   useEffect(() => {
     const fetchAdminDetails = async () => {
@@ -39,6 +42,21 @@ const ProfileHeader = () => {
     fetchAdminDetails();
   }, []);
 
+  useEffect(() => {
+    const fetchAlerts = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/getAll_Alert`);
+        if (response.data && response.data.result) {
+          setAlerts(response.data.result);
+        }
+      } catch (error) {
+        console.error('Error fetching alerts:', error);
+      }
+    };
+
+    fetchAlerts();
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminDetails');
@@ -47,6 +65,10 @@ const ProfileHeader = () => {
 
   const toggleProfileCard = () => {
     setProfileCardVisible(!isProfileCardVisible);
+  };
+
+  const toggleNotificationPanel = () => {
+    setNotificationPanelVisible(!isNotificationPanelVisible);
   };
 
   return (
@@ -74,8 +96,32 @@ const ProfileHeader = () => {
       <div className="app-logo">
         <img src={appLogo} alt="App Logo" className="center-logo-img" />
       </div>
-      <div className="notification-bell">
+      <div className="notification-bell" onClick={toggleNotificationPanel}>
         <img src={notification} alt="Notification Icon" className="icon-img" />
+        {isNotificationPanelVisible && (
+          <div className="notification-panel">
+            {alerts.length > 0 ? (
+              alerts.map((alert) => (
+                <div className="notification-card" key={alert._AlertID}>
+                  <div className="notification-icon">
+                    {/* Add an icon based on AlertType, here just using a placeholder */}
+                    🔔
+                  </div>
+                  <div className="notification-content">
+                    <h5>{alert._AlertType}</h5>
+                    <p>{alert._Message ? alert._Message : "No additional message"}</p>
+                    <p>{new Date(alert._SentDate).toLocaleString()}</p>
+                  </div>
+                  <div className="close-icon" onClick={() => setNotificationPanelVisible(false)}>
+                    ✖
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No alerts available</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
