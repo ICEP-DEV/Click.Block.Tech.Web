@@ -14,6 +14,10 @@ const ProfileHeader = () => {
   const [isNotificationPanelVisible, setNotificationPanelVisible] = useState(false);
   const [adminDetails, setAdminDetails] = useState({ name: '', surname: '' });
   const [alerts, setAlerts] = useState([]);
+  
+  // Track touch positions
+  let touchStartX = 0;
+  let touchEndX = 0;
 
   useEffect(() => {
     const fetchAdminDetails = async () => {
@@ -67,12 +71,35 @@ const ProfileHeader = () => {
     setProfileCardVisible(!isProfileCardVisible);
   };
 
-  const toggleNotificationPanel = () => {
+  const toggleNotificationPanel = (e) => {
+    e.stopPropagation();
     setNotificationPanelVisible(!isNotificationPanelVisible);
   };
 
+  const handleNotificationClick = (e) => {
+    e.stopPropagation(); // Prevent notification panel from closing when interacting with it
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e, alertId) => {
+    touchEndX = e.changedTouches[0].clientX;
+    const movement = touchStartX - touchEndX;
+
+    // If movement exceeds 100 pixels, delete the alert
+    if (movement > 100) {
+      handleSwipeToDelete(alertId);
+    }
+  };
+
+  const handleSwipeToDelete = (alertId) => {
+    setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert._AlertID !== alertId));
+  };
+
   return (
-    <div className="top-header">
+    <div className="top-header" onClick={() => setNotificationPanelVisible(false)}>
       <div className="profile-icon" onClick={toggleProfileCard}>
         <img src={profileIcon} alt="Profile Icon" className="icon-img" />
         {isProfileCardVisible && (
@@ -96,24 +123,24 @@ const ProfileHeader = () => {
       <div className="app-logo">
         <img src={appLogo} alt="App Logo" className="center-logo-img" />
       </div>
+
+      {/* notification bell */}
       <div className="notification-bell" onClick={toggleNotificationPanel}>
         <img src={notification} alt="Notification Icon" className="icon-img" />
         {isNotificationPanelVisible && (
-          <div className="notification-panel">
+          <div className="notification-panel" onClick={handleNotificationClick}>
             {alerts.length > 0 ? (
               alerts.map((alert) => (
-                <div className="notification-card" key={alert._AlertID}>
-                  <div className="notification-icon">
-                    {/* Add an icon based on AlertType, here just using a placeholder */}
-                    🔔
-                  </div>
+                <div
+                  className="notification-card"
+                  key={alert._AlertID}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={(e) => handleTouchMove(e, alert._AlertID)}
+                >
                   <div className="notification-content">
                     <h5>{alert._AlertType}</h5>
                     <p>{alert._Message ? alert._Message : "No additional message"}</p>
                     <p>{new Date(alert._SentDate).toLocaleString()}</p>
-                  </div>
-                  <div className="close-icon" onClick={() => setNotificationPanelVisible(false)}>
-                    ✖
                   </div>
                 </div>
               ))
