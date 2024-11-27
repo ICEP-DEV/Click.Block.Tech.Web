@@ -14,6 +14,10 @@ const ProfileHeader = () => {
   const [isNotificationPanelVisible, setNotificationPanelVisible] = useState(false);
   const [adminDetails, setAdminDetails] = useState({ name: '', surname: '' });
   const [alerts, setAlerts] = useState([]);
+  
+  // Track touch positions
+  let touchStartX = 0;
+  let touchEndX = 0;
 
   useEffect(() => {
     const fetchAdminDetails = async () => {
@@ -72,7 +76,8 @@ const ProfileHeader = () => {
     setProfileCardVisible(!isProfileCardVisible);
   };
 
-  const toggleNotificationPanel = () => {
+  const toggleNotificationPanel = (e) => {
+    e.stopPropagation();
     setNotificationPanelVisible(!isNotificationPanelVisible);
   };
 
@@ -88,7 +93,7 @@ const ProfileHeader = () => {
   const visibleAlertsCount = alerts.filter((alert) => alert.isVisible).length;
 
   return (
-    <div className="top-header">
+    <div className="top-header" onClick={() => setNotificationPanelVisible(false)}>
       <div className="profile-icon" onClick={toggleProfileCard}>
         <img src={profileIcon} alt="Profile Icon" className="icon-img" />
         {isProfileCardVisible && (
@@ -112,6 +117,8 @@ const ProfileHeader = () => {
       <div className="app-logo">
         <img src={appLogo} alt="App Logo" className="center-logo-img" />
       </div>
+
+      {/* notification bell */}
       <div className="notification-bell" onClick={toggleNotificationPanel}>
         <img src={notification} alt="Notification Icon" className="icon-img" />
         {visibleAlertsCount > 0 && (
