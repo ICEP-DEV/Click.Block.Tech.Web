@@ -1,65 +1,85 @@
 /* Notification Panel Styling */
 .notification-panel {
-  position: fixed; /* Make sure it stays under the header when scrolling */
-  top: 90px;
-  right: 20px;
-  width: 300px;
-  background-color: #1e2a47b1;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  z-index: 2000;
-  max-height: 400px; /* Set maximum height for the panel */
-  overflow-y: auto; /* Enable vertical scrolling when the content exceeds max-height */
-}
-
-/* Hide Scrollbar but Enable Scrolling */
-.notification-panel::-webkit-scrollbar {
-  width: 0; /* Hide the scrollbar (for Webkit browsers like Chrome, Safari, etc.) */
-}
-
-.notification-panel {
-  -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
-  scrollbar-width: none;     /* Hide scrollbar for Firefox */
-}
-
-/* Notification Card Styling */
-.notification-card {
-  display: flex;
-  align-items: center;
-  background-color: #1c5288;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  color: #ffffff;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.3s, transform 0.3s;
-}
-
-.notification-card.swiping {
-  transform: translateX(-100%);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.notification-card:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-  transform: scale(1.02);
-}
-
-.notification-content {
-  flex-grow: 1;
-}
-
-.notification-content h5 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.notification-content p {
-  margin: 5px 0;
-  font-size: 12px;
-  color: #bdc3c7;
-}
+    position: fixed; /* Make sure it stays under the header when scrolling */
+    top: 60px;
+    right: 20px;
+    width: 300px;
+    background-color: #1e2a47;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 2000;
+    max-height: 400px; /* Set maximum height for the panel */
+    overflow-y: auto; /* Enable vertical scrolling when the content exceeds max-height */
+  }
+  
+  /* Hide Scrollbar but Enable Scrolling */
+  .notification-panel::-webkit-scrollbar {
+    width: 0; /* Hide the scrollbar (for Webkit browsers like Chrome, Safari, etc.) */
+  }
+  
+  .notification-panel {
+    -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
+    scrollbar-width: none;     /* Hide scrollbar for Firefox */
+  }
+  
+  /* Notification Card Styling */
+  .notification-card {
+    display: flex;
+    align-items: center;
+    background-color: #1c5288;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: #ffffff;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  
+  .notification-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transform: scale(1.02);
+  }
+  
+  .notification-icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .notification-content {
+    flex-grow: 1;
+  }
+  
+  .notification-content h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .notification-content p {
+    margin: 5px 0;
+    font-size: 12px;
+    color: #bdc3c7;
+  }
+  
+  .close-icon {
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ffffff;
+  }
+  .notification-badge {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 50%;
+    text-align: center;
+  }

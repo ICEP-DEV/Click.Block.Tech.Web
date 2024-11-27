@@ -51,7 +51,12 @@ const ProfileHeader = () => {
       try {
         const response = await axios.get(`${BASE_URL}/getAll_Alert`);
         if (response.data && response.data.result) {
-          setAlerts(response.data.result);
+          // Add isVisible flag to each alert
+          const alertsWithVisibility = response.data.result.map((alert) => ({
+            ...alert,
+            isVisible: true,
+          }));
+          setAlerts(alertsWithVisibility);
         }
       } catch (error) {
         console.error('Error fetching alerts:', error);
@@ -76,27 +81,16 @@ const ProfileHeader = () => {
     setNotificationPanelVisible(!isNotificationPanelVisible);
   };
 
-  const handleNotificationClick = (e) => {
-    e.stopPropagation(); // Prevent notification panel from closing when interacting with it
+  const hideNotification = (alertID) => {
+    setAlerts((prevAlerts) =>
+      prevAlerts.map((alert) =>
+        alert._AlertID === alertID ? { ...alert, isVisible: false } : alert
+      )
+    );
   };
 
-  const handleTouchStart = (e) => {
-    touchStartX = e.changedTouches[0].clientX;
-  };
-
-  const handleTouchMove = (e, alertId) => {
-    touchEndX = e.changedTouches[0].clientX;
-    const movement = touchStartX - touchEndX;
-
-    // If movement exceeds 100 pixels, delete the alert
-    if (movement > 100) {
-      handleSwipeToDelete(alertId);
-    }
-  };
-
-  const handleSwipeToDelete = (alertId) => {
-    setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert._AlertID !== alertId));
-  };
+  // Count visible alerts
+  const visibleAlertsCount = alerts.filter((alert) => alert.isVisible).length;
 
   return (
     <div className="top-header" onClick={() => setNotificationPanelVisible(false)}>
@@ -127,23 +121,34 @@ const ProfileHeader = () => {
       {/* notification bell */}
       <div className="notification-bell" onClick={toggleNotificationPanel}>
         <img src={notification} alt="Notification Icon" className="icon-img" />
+        {visibleAlertsCount > 0 && (
+          <div className="notification-badge">
+            {visibleAlertsCount}
+          </div>
+        )}
         {isNotificationPanelVisible && (
-          <div className="notification-panel" onClick={handleNotificationClick}>
-            {alerts.length > 0 ? (
-              alerts.map((alert) => (
-                <div
-                  className="notification-card"
-                  key={alert._AlertID}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={(e) => handleTouchMove(e, alert._AlertID)}
-                >
-                  <div className="notification-content">
-                    <h5>{alert._AlertType}</h5>
-                    <p>{alert._Message ? alert._Message : "No additional message"}</p>
-                    <p>{new Date(alert._SentDate).toLocaleString()}</p>
+          <div className="notification-panel">
+            {alerts.filter((alert) => alert.isVisible).length > 0 ? (
+              alerts
+                .filter((alert) => alert.isVisible)
+                .map((alert) => (
+                  <div className="notification-card" key={alert._AlertID}>
+                    <div className="notification-icon">
+                      🔔
+                    </div>
+                    <div className="notification-content">
+                      <h5>{alert._AlertType}</h5>
+                      <p>{alert._Message ? alert._Message : 'No additional message'}</p>
+                      <p>{new Date(alert._SentDate).toLocaleString()}</p>
+                    </div>
+                    <div
+                      className="close-icon"
+                      onClick={() => hideNotification(alert._AlertID)}
+                    >
+                      ✖
+                    </div>
                   </div>
-                </div>
-              ))
+                ))
             ) : (
               <p>No alerts available</p>
             )}
