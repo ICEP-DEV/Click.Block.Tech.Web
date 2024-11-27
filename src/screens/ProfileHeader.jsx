@@ -47,7 +47,12 @@ const ProfileHeader = () => {
       try {
         const response = await axios.get(`${BASE_URL}/getAll_Alert`);
         if (response.data && response.data.result) {
-          setAlerts(response.data.result);
+          // Add isVisible flag to each alert
+          const alertsWithVisibility = response.data.result.map((alert) => ({
+            ...alert,
+            isVisible: true,
+          }));
+          setAlerts(alertsWithVisibility);
         }
       } catch (error) {
         console.error('Error fetching alerts:', error);
@@ -70,6 +75,17 @@ const ProfileHeader = () => {
   const toggleNotificationPanel = () => {
     setNotificationPanelVisible(!isNotificationPanelVisible);
   };
+
+  const hideNotification = (alertID) => {
+    setAlerts((prevAlerts) =>
+      prevAlerts.map((alert) =>
+        alert._AlertID === alertID ? { ...alert, isVisible: false } : alert
+      )
+    );
+  };
+
+  // Count visible alerts
+  const visibleAlertsCount = alerts.filter((alert) => alert.isVisible).length;
 
   return (
     <div className="top-header">
@@ -98,25 +114,34 @@ const ProfileHeader = () => {
       </div>
       <div className="notification-bell" onClick={toggleNotificationPanel}>
         <img src={notification} alt="Notification Icon" className="icon-img" />
+        {visibleAlertsCount > 0 && (
+          <div className="notification-badge">
+            {visibleAlertsCount}
+          </div>
+        )}
         {isNotificationPanelVisible && (
           <div className="notification-panel">
-            {alerts.length > 0 ? (
-              alerts.map((alert) => (
-                <div className="notification-card" key={alert._AlertID}>
-                  <div className="notification-icon">
-                    {/* Add an icon based on AlertType, here just using a placeholder */}
-                    🔔
+            {alerts.filter((alert) => alert.isVisible).length > 0 ? (
+              alerts
+                .filter((alert) => alert.isVisible)
+                .map((alert) => (
+                  <div className="notification-card" key={alert._AlertID}>
+                    <div className="notification-icon">
+                      🔔
+                    </div>
+                    <div className="notification-content">
+                      <h5>{alert._AlertType}</h5>
+                      <p>{alert._Message ? alert._Message : 'No additional message'}</p>
+                      <p>{new Date(alert._SentDate).toLocaleString()}</p>
+                    </div>
+                    <div
+                      className="close-icon"
+                      onClick={() => hideNotification(alert._AlertID)}
+                    >
+                      ✖
+                    </div>
                   </div>
-                  <div className="notification-content">
-                    <h5>{alert._AlertType}</h5>
-                    <p>{alert._Message ? alert._Message : "No additional message"}</p>
-                    <p>{new Date(alert._SentDate).toLocaleString()}</p>
-                  </div>
-                  <div className="close-icon" onClick={() => setNotificationPanelVisible(false)}>
-                    ✖
-                  </div>
-                </div>
-              ))
+                ))
             ) : (
               <p>No alerts available</p>
             )}
