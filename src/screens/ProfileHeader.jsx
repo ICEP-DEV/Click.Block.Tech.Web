@@ -8,6 +8,9 @@ import notification from '../assets/Homepage/notification.png';
 import appLogo from '../assets/Logo.png';
 import { BASE_URL } from '../API/API';
 
+// Define the close icon URL
+const closeIconURL = 'https://img.icons8.com/stickers/50/multiply-2.png';
+
 const ProfileHeader = () => {
   const navigate = useNavigate();
   const [isProfileCardVisible, setProfileCardVisible] = useState(false);
@@ -47,7 +50,6 @@ const ProfileHeader = () => {
       try {
         const response = await axios.get(`${BASE_URL}/getAll_Alert`);
         if (response.data && response.data.result) {
-          // Add isVisible and swipe state to each alert
           const alertsWithState = response.data.result.map((alert) => ({
             ...alert,
             isVisible: true,
@@ -134,6 +136,26 @@ const ProfileHeader = () => {
     );
   };
 
+  const handleCloseClick = (alertID) => {
+    // Dismiss the alert with a fade-out animation
+    setAlerts((prevAlerts) =>
+      prevAlerts.map((alert) =>
+        alert._AlertID === alertID
+          ? {
+              ...alert,
+              isClosing: true, // Flag to trigger fade-out
+            }
+          : alert
+      )
+    );
+    // Remove the alert after the animation completes
+    setTimeout(() => {
+      setAlerts((prevAlerts) =>
+        prevAlerts.filter((a) => a._AlertID !== alertID)
+      );
+    }, 300); // Duration matches the CSS transition
+  };
+
   // Count visible alerts
   const visibleAlertsCount = alerts.filter((alert) => alert.isVisible).length;
 
@@ -185,8 +207,12 @@ const ProfileHeader = () => {
                     onMouseLeave={(e) => alert.isSwiping && handleSwipeEnd(e, alert._AlertID)}
                     style={{
                       transform: `translateX(${alert.translationX}px) rotate(${alert.translationX / 15}deg)`,
-                      transition: alert.isSwiping ? 'none' : 'transform 0.3s ease, opacity 0.3s ease',
-                      opacity: 1 - Math.abs(alert.translationX) / 300, // Fade out
+                      transition: alert.isSwiping
+                        ? 'none'
+                        : 'transform 0.3s ease, opacity 0.3s ease',
+                      opacity: alert.isClosing
+                        ? 0
+                        : 1 - Math.abs(alert.translationX) / 300, // Fade out
                       userSelect: 'none',
                     }}
                   >
@@ -194,6 +220,13 @@ const ProfileHeader = () => {
                       <h5>{alert._AlertType}</h5>
                       <p>{alert._Message ? alert._Message : 'No additional message'}</p>
                       <p>{new Date(alert._SentDate).toLocaleString()}</p>
+                    </div>
+                    <div
+                      className="close-icon"
+                      onClick={() => handleCloseClick(alert._AlertID)}
+                    >
+                      {/* Replace the '✖' with the image */}
+                      <img src={closeIconURL} alt="Close Icon" className="close-icon-img" />
                     </div>
                   </div>
                 ))
