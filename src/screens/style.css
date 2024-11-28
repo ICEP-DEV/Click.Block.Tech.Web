@@ -46,7 +46,7 @@ body {
   box-shadow: 0 7px 20px 5px #020405cc;
   overflow: hidden;
   transition: 0.5s all;
-  z-index: 2000; /* Increased z-index to ensure the card shows above the header */
+  z-index: 2000;
 }
 
 .profile-card:hover {
@@ -72,35 +72,6 @@ body {
   text-align: center;
 }
 
-.description {
-  margin: 0.5rem 0;
-  color: #a89ec9;
-}
-
-.tokenInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.price,
-.duration {
-  display: flex;
-  align-items: center;
-  color: #ee83e5;
-  font-weight: 700;
-}
-
-.duration {
-  color: #a89ec9;
-}
-
-ins {
-  text-decoration: none;
-  margin-right: 0.5rem;
-}
-
 hr {
   width: 100%;
   border: none;
@@ -116,8 +87,8 @@ hr {
 }
 
 .logout-button {
-  background-color:white;
-  color:#1C5288;
+  background-color: white;
+  color: #1C5288;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -126,7 +97,7 @@ hr {
 }
 
 .logout-button:hover {
-  background-color:#18232f;
+  background-color: #18232f;
 }
 
 .app-logo {
@@ -250,7 +221,7 @@ h2 {
 /* Dashboard Container */
 .dashboard-container {
   padding: 20px;
-  padding-top: 80px; /* Adjusted to accommodate fixed header */
+  padding-top: 80px;
   background-image: url('https://cdn.pixabay.com/photo/2015/04/23/21/59/hot-air-balloon-736879_1280.jpg');
   background-size: cover;
   background-position: center;
@@ -362,7 +333,7 @@ h2 {
 
 /* General Reset for Consistency */
 * {
-  box-sizing: border-box; /* Prevent padding and margin issues affecting layout width */
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -370,7 +341,7 @@ h2 {
 /* General Styles to Prevent Layout Shift */
 body {
   margin: 0;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: hidden;
 }
 
 button, 
