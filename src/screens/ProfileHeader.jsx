@@ -50,14 +50,18 @@ const ProfileHeader = () => {
       try {
         const response = await axios.get(`${BASE_URL}/getAll_Alert`);
         if (response.data && response.data.result) {
-          const alertsWithState = response.data.result.map((alert) => ({
-            ...alert,
-            isVisible: true,
-            isSwiping: false,
-            startX: 0,
-            currentX: 0,
-            translationX: 0,
-          }));
+          const dismissedAlerts = JSON.parse(sessionStorage.getItem('dismissedAlerts')) || [];
+          // Filter out dismissed alerts
+          const alertsWithState = response.data.result
+            .filter((alert) => !dismissedAlerts.includes(alert._AlertID))
+            .map((alert) => ({
+              ...alert,
+              isVisible: true,
+              isSwiping: false,
+              startX: 0,
+              currentX: 0,
+              translationX: 0,
+            }));
           setAlerts(alertsWithState);
         }
       } catch (error) {
@@ -71,6 +75,7 @@ const ProfileHeader = () => {
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminDetails');
+    sessionStorage.removeItem('dismissedAlerts'); // Clear dismissed alerts on logout
     navigate('/');
   };
 
@@ -121,6 +126,12 @@ const ProfileHeader = () => {
                 prevAlerts.filter((a) => a._AlertID !== alertID)
               );
             }, 300); // Match with CSS transition duration
+
+            // Store dismissed alert ID in session storage
+            const dismissedAlerts = JSON.parse(sessionStorage.getItem('dismissedAlerts')) || [];
+            dismissedAlerts.push(alertID);
+            sessionStorage.setItem('dismissedAlerts', JSON.stringify(dismissedAlerts));
+
             return {
               ...alert,
               isSwiping: false,
@@ -138,6 +149,7 @@ const ProfileHeader = () => {
 
   const handleCloseClick = (e, alertID) => {
     e.stopPropagation(); // Prevent the click from closing the notification panel
+
     // Dismiss the alert with a fade-out animation
     setAlerts((prevAlerts) =>
       prevAlerts.map((alert) =>
@@ -149,6 +161,12 @@ const ProfileHeader = () => {
           : alert
       )
     );
+
+    // Store dismissed alert ID in session storage
+    const dismissedAlerts = JSON.parse(sessionStorage.getItem('dismissedAlerts')) || [];
+    dismissedAlerts.push(alertID);
+    sessionStorage.setItem('dismissedAlerts', JSON.stringify(dismissedAlerts));
+
     // Remove the alert after the animation completes
     setTimeout(() => {
       setAlerts((prevAlerts) =>
@@ -158,7 +176,7 @@ const ProfileHeader = () => {
   };
 
   // Count visible alerts
-  const visibleAlertsCount = alerts.filter((alert) => alert.isVisible).length;
+  const visibleAlertsCount = alerts.length;
 
   return (
     <div className="top-header" onClick={() => setNotificationPanelVisible(false)}>
@@ -189,53 +207,53 @@ const ProfileHeader = () => {
       {/* notification bell */}
       <div className="notification-bell" onClick={toggleNotificationPanel}>
         <img src={notification} alt="Notification Icon" className="icon-img" />
-        {visibleAlertsCount > 0 && <div className="notification-badge">{visibleAlertsCount}</div>}
+        {visibleAlertsCount > 0 && (
+          <div className="notification-badge">{visibleAlertsCount}</div>
+        )}
         {isNotificationPanelVisible && (
           <div
             className="notification-panel"
             onClick={(e) => e.stopPropagation()} // Prevent clicks inside the panel from closing it
           >
-            {alerts.filter((alert) => alert.isVisible).length > 0 ? (
-              alerts
-                .filter((alert) => alert.isVisible)
-                .map((alert) => (
-                  <div
-                    className="notification-card"
-                    key={alert._AlertID}
-                    onTouchStart={(e) => handleSwipeStart(e, alert._AlertID)}
-                    onTouchMove={(e) => handleSwipeMove(e, alert._AlertID)}
-                    onTouchEnd={(e) => handleSwipeEnd(e, alert._AlertID)}
-                    onMouseDown={(e) => handleSwipeStart(e, alert._AlertID)}
-                    onMouseMove={(e) => alert.isSwiping && handleSwipeMove(e, alert._AlertID)}
-                    onMouseUp={(e) => handleSwipeEnd(e, alert._AlertID)}
-                    onMouseLeave={(e) => alert.isSwiping && handleSwipeEnd(e, alert._AlertID)}
-                    style={{
-                      transform: `translateX(${alert.translationX}px) rotate(${
-                        alert.translationX / 15
-                      }deg)`,
-                      transition: alert.isSwiping
-                        ? 'none'
-                        : 'transform 0.3s ease, opacity 0.3s ease',
-                      opacity: alert.isClosing
-                        ? 0
-                        : 1 - Math.abs(alert.translationX) / 500, // Fade out
-                      userSelect: 'none',
-                    }}
-                  >
-                    <div className="notification-content">
-                      <h5>{alert._AlertType}</h5>
-                      <p>{alert._Message ? alert._Message : 'No additional message'}</p>
-                      <p>{new Date(alert._SentDate).toLocaleString()}</p>
-                    </div>
-                    <div
-                      className="close-icon"
-                      onClick={(e) => handleCloseClick(e, alert._AlertID)}
-                    >
-                      {/* Replace the '✖' with the image */}
-                      <img src={closeIconURL} alt="Close Icon" className="close-icon-img" />
-                    </div>
+            {alerts.length > 0 ? (
+              alerts.map((alert) => (
+                <div
+                  className="notification-card"
+                  key={alert._AlertID}
+                  onTouchStart={(e) => handleSwipeStart(e, alert._AlertID)}
+                  onTouchMove={(e) => handleSwipeMove(e, alert._AlertID)}
+                  onTouchEnd={(e) => handleSwipeEnd(e, alert._AlertID)}
+                  onMouseDown={(e) => handleSwipeStart(e, alert._AlertID)}
+                  onMouseMove={(e) => alert.isSwiping && handleSwipeMove(e, alert._AlertID)}
+                  onMouseUp={(e) => handleSwipeEnd(e, alert._AlertID)}
+                  onMouseLeave={(e) => alert.isSwiping && handleSwipeEnd(e, alert._AlertID)}
+                  style={{
+                    transform: `translateX(${alert.translationX}px) rotate(${
+                      alert.translationX / 15
+                    }deg)`,
+                    transition: alert.isSwiping
+                      ? 'none'
+                      : 'transform 0.3s ease, opacity 0.3s ease',
+                    opacity: alert.isClosing
+                      ? 0
+                      : 1 - Math.abs(alert.translationX) / 300, // Fade out
+                    userSelect: 'none',
+                  }}
+                >
+                  <div className="notification-content">
+                    <h5>{alert._AlertType}</h5>
+                    <p>{alert._Message ? alert._Message : 'No additional message'}</p>
+                    <p>{new Date(alert._SentDate).toLocaleString()}</p>
                   </div>
-                ))
+                  <div
+                    className="close-icon"
+                    onClick={(e) => handleCloseClick(e, alert._AlertID)}
+                  >
+                    {/* Replace the '✖' with the image */}
+                    <img src={closeIconURL} alt="Close Icon" className="close-icon-img" />
+                  </div>
+                </div>
+              ))
             ) : (
               <p>No alerts available</p>
             )}
