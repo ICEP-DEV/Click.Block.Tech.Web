@@ -1,4 +1,4 @@
-.pin-entry-container {
+.pin-entry-container  {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,10 +8,41 @@
     padding: 20px;
     color: white;
   }
+  .inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 75vh;
+    background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
+    padding: 20px;
+    color: white;
+   
+  }
+  .loading-container{
+    background-color: white;
+    height: 50vh;
+    width: 75vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+
+  }
+  .loading-anim-container{
+    width: 150px;
+    height: 150px;
+  }
   
   .pin-entry-logo {
     width: 150px; /* Adjust logo size */
     margin-bottom: 20px;
+  }
+  .error_message{
+    color: red;
   }
   
   .pin-entry-heading {

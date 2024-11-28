@@ -1,0 +1,29 @@
+.lockedAccount-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
+    padding: 20px;
+    color: white;
+}
+.accLocked-container{
+    height: 150px;
+    width: 150px;
+}
+.message-container{
+    background-color: white;
+    height: 50vh;
+    width: 75vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: first baseline;
+    color: black;
+}
+.logo{
+    width: 150px; /* Adjust logo size */
+    margin-bottom: 20px;
+}

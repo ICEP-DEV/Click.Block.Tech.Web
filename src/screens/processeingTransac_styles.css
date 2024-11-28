@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(180deg, #0F0C29 0%, #16335D 60%, #1E5E98 94%);
+    padding: 20px;
+    color: white;
+}
+.logo{
+    width: 150px; /* Adjust logo size */
+    margin-bottom: 20px;
+}
+.trans_msg_container{
+    height: 300px;
+    background-color: white;
+    width: 300px;
+}

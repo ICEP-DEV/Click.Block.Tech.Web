@@ -16,7 +16,7 @@ const QRCodePage = () => {
       {/* Background wrapper for heading and subheading */}
       <div className="qr-code-heading-container">
         {/* Heading */}
-        <h1 className="qr-code-heading">Hello Again, Jonathan Moatshe!</h1>
+        <h1 className="qr-code-heading">Hello Welcome to Nexis ATM!</h1>
 
         {/* Subheading */}
         <p className="qr-code-subheading">
