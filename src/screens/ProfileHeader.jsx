@@ -136,7 +136,8 @@ const ProfileHeader = () => {
     );
   };
 
-  const handleCloseClick = (alertID) => {
+  const handleCloseClick = (e, alertID) => {
+    e.stopPropagation(); // Prevent the click from closing the notification panel
     // Dismiss the alert with a fade-out animation
     setAlerts((prevAlerts) =>
       prevAlerts.map((alert) =>
@@ -190,7 +191,10 @@ const ProfileHeader = () => {
         <img src={notification} alt="Notification Icon" className="icon-img" />
         {visibleAlertsCount > 0 && <div className="notification-badge">{visibleAlertsCount}</div>}
         {isNotificationPanelVisible && (
-          <div className="notification-panel">
+          <div
+            className="notification-panel"
+            onClick={(e) => e.stopPropagation()} // Prevent clicks inside the panel from closing it
+          >
             {alerts.filter((alert) => alert.isVisible).length > 0 ? (
               alerts
                 .filter((alert) => alert.isVisible)
@@ -206,13 +210,15 @@ const ProfileHeader = () => {
                     onMouseUp={(e) => handleSwipeEnd(e, alert._AlertID)}
                     onMouseLeave={(e) => alert.isSwiping && handleSwipeEnd(e, alert._AlertID)}
                     style={{
-                      transform: `translateX(${alert.translationX}px) rotate(${alert.translationX / 15}deg)`,
+                      transform: `translateX(${alert.translationX}px) rotate(${
+                        alert.translationX / 15
+                      }deg)`,
                       transition: alert.isSwiping
                         ? 'none'
                         : 'transform 0.3s ease, opacity 0.3s ease',
                       opacity: alert.isClosing
                         ? 0
-                        : 1 - Math.abs(alert.translationX) / 300, // Fade out
+                        : 1 - Math.abs(alert.translationX) / 500, // Fade out
                       userSelect: 'none',
                     }}
                   >
@@ -223,7 +229,7 @@ const ProfileHeader = () => {
                     </div>
                     <div
                       className="close-icon"
-                      onClick={() => handleCloseClick(alert._AlertID)}
+                      onClick={(e) => handleCloseClick(e, alert._AlertID)}
                     >
                       {/* Replace the '✖' with the image */}
                       <img src={closeIconURL} alt="Close Icon" className="close-icon-img" />
