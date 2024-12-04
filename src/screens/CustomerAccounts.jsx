@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import './noti.css';
 import ProfileHeader from './ProfileHeader';
 import { BASE_URL } from '../API/API'; // Ensure BASE_URL is correctly imported or defined
 
 const CustomerAccounts = () => {
   const [customerAccountsData, setCustomerAccountsData] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState(null); // State for selected customer
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,10 +21,10 @@ const CustomerAccounts = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log("Fetched Data:", response.data); // Debug fetched data
         setCustomerAccountsData(response.data);
       } catch (error) {
         console.error('Error fetching customer accounts:', error.response ? error.response.data : error);
-        // Handle the error (e.g., set an error state or display a message)
       }
     };
 
@@ -29,7 +32,6 @@ const CustomerAccounts = () => {
   }, []);
 
   const handleSearch = (searchTerm) => {
-    // Your existing search logic
     if (searchTerm.toLowerCase() === 'all') {
       navigate('/customer-accounts');
     } else if (searchTerm.toLowerCase() === 'deactivated') {
@@ -43,6 +45,17 @@ const CustomerAccounts = () => {
     } else if (searchTerm.toLowerCase() === 'home') {
       navigate('/dashboard');
     }
+  };
+
+  const handleRowClick = (customer) => {
+    console.log("Row clicked:", customer); // Debug the click event
+    setSelectedCustomer(customer);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedCustomer(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -62,16 +75,31 @@ const CustomerAccounts = () => {
         </thead>
         <tbody>
           {customerAccountsData.map((account, index) => (
-            <tr key={index}>
-              <td>{account['Email Address']}</td>
-              <td>{account['Customer Details']}</td>
-              <td>{account['Registration Date']}</td>
-              <td>{account['Account Status']}</td>
-              <td>{account['Last Login']}</td>
+            <tr key={index} onClick={() => handleRowClick(account)}>
+              <td>{account['email']}</td>
+              <td>{account['customerDetails']}</td>
+              <td>{account['registrationDate']}</td>
+              <td>{account['accountStatus']}</td>
+              <td>{account['lastLogin']}</td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {isModalOpen && selectedCustomer && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="close-button" onClick={closeModal}>X</button>
+            <h3>{selectedCustomer.customerDetails}</h3>
+            <p><strong>Email:</strong> {selectedCustomer.email}</p>
+            <p><strong>Phone Number:</strong> {selectedCustomer.phoneNumber}</p>
+            <p><strong>Address:</strong> {selectedCustomer.physicalAddress}</p>
+            <p><strong>Registered On:</strong> {selectedCustomer.registrationDate}</p>
+            <p><strong>Last Login:</strong> {selectedCustomer.lastLogin}</p>
+            <p><strong>Account Status:</strong> {selectedCustomer.accountStatus}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
