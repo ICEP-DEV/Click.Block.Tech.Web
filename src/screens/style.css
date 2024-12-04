@@ -124,6 +124,21 @@ hr {
   color: #02457A;
 }
 
+/* .resolve-btn {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+} */
+
+.resolve-btn:hover {
+  background-color: #218838;
+}
+
 .alert_liveLocation_btn button {
   width: 100px;
   height: 35px;
@@ -335,4 +350,25 @@ input {
   border: none;
 }
 
+/* Custom Modal Styles */
+.custom-modal .modal-header {
+  background-color: #1C5288;  /* Deep blue background */
+  color: #fff;                /* White text */
+}
 
+.custom-modal .modal-body {
+  background-color: #eee;  
+}
+
+.custom-modal .modal-footer {
+  background-color: #1C5288;  /* Deep blue background */
+}
+
+.custom-modal .modal-footer .btn-primary {
+  background-color: #1C5288;  /* Blue button background */
+  border-color: #1C5288;      /* Blue border */
+}
+
+.custom-modal .modal-footer .btn-primary:hover {
+  background-color: #155d8c;  /* Darker shade of blue on hover */
+}

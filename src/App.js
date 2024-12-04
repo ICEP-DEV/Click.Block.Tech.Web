@@ -11,6 +11,7 @@ import DeactivatedAccounts from './screens/DeactivateAccounts';
 import ProtectedRoute from './screens/components/ProtectedRoute';
 import ActiveAccounts from './screens/ActiveAccounts';
 import RestoredAccounts from './screens/RestoredAccounts';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
