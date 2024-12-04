@@ -7,6 +7,7 @@ import profileIcon from '../assets/Homepage/account.png';
 import notification from '../assets/Homepage/notification.png';
 import appLogo from '../assets/Logo.png';
 import { BASE_URL } from '../API/API';
+import { Link } from 'react-router-dom';
 
 // Define the close icon URL
 const closeIconURL = 'https://img.icons8.com/stickers/50/multiply-2.png';
@@ -201,7 +202,9 @@ const ProfileHeader = () => {
         )}
       </div>
       <div className="app-logo">
+      <Link to="/dashboard">
         <img src={appLogo} alt="App Logo" className="center-logo-img" />
+        </Link>
       </div>
 
       {/* notification bell */}
