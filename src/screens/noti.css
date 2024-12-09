@@ -1,213 +1,117 @@
-/* Modal Overlay */
+.notification-panel {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 300px;
+  background-color: rgba(30, 42, 71, 0); /* Adjusted opacity */
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  padding: 10px;
+  z-index: 2000;
+  max-height: 400px;
+  overflow-y: auto;
+} 
+
+/* Hide Scrollbar but Enable Scrolling */
+.notification-panel::-webkit-scrollbar {
+  width: 0;
+}
+
+.notification-panel {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Notification Card Styling */
+.notification-card {
+  display: flex;
+  align-items: center;
+  background-color: #1c5288;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.211); /* Set border width, style, and color */
+  border-radius: 45px; /* Adjust this value if you want less rounded corners */
+  color: #ffffff;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.notification-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.notification-content {
+  flex-grow: 1;
+}
+
+.notification-content h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.notification-content p {
+  margin: -0.6px 0;
+  font-size: 12px;
+  color: #bdc3c7;
+}
+
+/* Close icon styles */
+.close-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+
+}
+
+.close-icon-img {
+  width: 20px;
+  height: 20px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgb(255, 0, 0);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 9px;
+  border-radius: 50%;
+  text-align: center;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Darker background for emphasis */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal Content */
 .modal-content {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 15px;
-  width: 300px;
-  height: 200px;
-  perspective: 1000px;
-  max-width: 90%;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  font-family: Arial, sans-serif;
-}
-
-/* Card Inner for 3D Flip Effect */
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.999s;
-}
-
-.modal-content:hover .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 15px;
-}
-
-.card-front {
-  background-color: #6A2C70;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  border: 10px solid #6A2C70;
+  padding: 30px;
   border-radius: 10px;
-  justify-content: center;
-  font-size: 24px;
-  transform: rotateY(0deg);
+  width: 500px;
+  position: relative;
 }
 
-.card-back {
-  background-color: #F08A5D;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  border: 10px solid #F08A5D;
-  border-radius: 10px;
-  justify-content: center;
-  font-size: 24px;
-  transform: rotateY(180deg);
-}
-
-/* Close Button */
 .close-button {
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 10px;
   background: none;
   border: none;
   font-size: 20px;
   cursor: pointer;
 }
-
-/* Profile Card Section */
-.profile-card {
-  align-items: center;
-  width: 100px;
-  height: 200px;
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.profile-picture {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 15px;
-  object-fit: cover; /* Ensure the image is properly cropped */
-}
-
-.customer-info {
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.customer-info h3 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* Status Badge */
-.status-badge {
-  color: #28a745; /* Green color */
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.status-badge::before {
-  content: '●';
-  color: #28a745; /* Green dot */
-  margin-right: 5px;
-}
-
-/* Requests Section */
-.requests-section {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  border-left: 5px solid #ff9800; /* Orange border for emphasis */
-  margin-bottom: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.requests-section h5 {
-  margin: 0;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.requests-section p {
-  margin: 5px 0;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* Recent Activity Log Section */
-.activity-log {
-  margin-bottom: 15px;
-}
-
-.activity-log h5 {
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.log-entry {
-  background-color: #e9f7ef; /* Light green for success-like entries */
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.log-entry.failed {
-  background-color: #ffebee; /* Light red for error-like entries */
-}
-
-.log-entry h6 {
-  margin: 0;
-  font-size: 14px;
-}
-
-.log-entry .timestamp {
-  font-size: 12px;
-  color: #6c757d;
-}
-
-/* Freeze and Deactivate Buttons */
-.button-section {
-  display: flex;
-  justify-content: space-between;
-}
-
-.action-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 8px 15px;
-  font-size: 14px;
-  cursor: pointer;
-  flex: 0.48;
-}
-
-.action-button.freeze {
-  background-color: #f0ad4e; /* Orange for freeze */
-}
-
-.action-button.deactivate {
-  background-color: #d9534f; /* Red for deactivate */
-}
+ 
