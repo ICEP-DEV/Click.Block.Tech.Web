@@ -76,6 +76,23 @@ const CustomerDetailsModal = ({ isOpen, onClose, customer, transactionData }) =>
           ))}
         </div>
 
+        {/* Display transaction details if provided */}
+        {transactionData && (
+          <>
+            <h3 className="section-title">TRANSACTION DETAILS</h3>
+            <div className="transaction-section">
+              <p><strong>Transaction ID:</strong> {transactionData.TransactionID}</p>
+              <p><strong>Account ID:</strong> {transactionData.AccountID}</p>
+              <p><strong>Type:</strong> {transactionData.TransactionType}</p>
+              <p><strong>Date:</strong> {new Date(transactionData.TransactionDate).toLocaleString()}</p>
+              <p><strong>Amount:</strong> {transactionData.TransactionAmount}</p>
+              <p><strong>Status:</strong> {transactionData.Status}</p>
+              <p><strong>Is Panic Triggered:</strong> {transactionData.IsPanicTrigered ? 'Yes' : 'No'}</p>
+              <p><strong>Location ID:</strong> {transactionData.LocationID}</p>
+            </div>
+          </>
+        )}
+
         <div className="action-button-section">
           <button className="action-button freeze">Freeze</button>
           <button className="action-button deactivate">Deactivate</button>

@@ -3,10 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import ProfileHeader from './ProfileHeader';
+import CustomerDetailsModal from './CustomerDetailsModal'; 
 import { BASE_URL } from '../API/API'; // Ensure BASE_URL is correctly imported or defined
-
-// Import the new modal component
-import CustomerDetailsModal from './CustomerDetailsModal';
 
 const CustomerAccounts = () => {
   const [customerAccountsData, setCustomerAccountsData] = useState([]);
@@ -52,15 +50,14 @@ const CustomerAccounts = () => {
 
   const handleRowClick = async (customer) => {
     setSelectedCustomer(customer);
-    // Fetch the transaction details for this customer if needed
+
+    // Assume the customer object has a TransactionID property
+    const transactionId = customer.TransactionID || 123456790; // fallback example
+
     try {
-      const token = localStorage.getItem('adminToken');
-      const response = await axios.get(`${BASE_URL}/transactions/${customer.CustomerID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTransactionData(response.data); // This should return an array or single transaction object
+      // Fetch transaction details using the provided API endpoint
+      const response = await axios.get(`http://localhost:5000/api/getTransactionByID/${transactionId}`);
+      setTransactionData(response.data);
     } catch (error) {
       console.error('Error fetching transaction data:', error.response ? error.response.data : error);
     }
@@ -70,8 +67,8 @@ const CustomerAccounts = () => {
 
   const closeModal = () => {
     setSelectedCustomer(null);
-    setIsModalOpen(false);
     setTransactionData(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -91,7 +88,11 @@ const CustomerAccounts = () => {
         </thead>
         <tbody>
           {customerAccountsData.map((account, index) => (
-            <tr key={index} onClick={() => handleRowClick(account)} style={{ cursor: 'pointer' }}>
+            <tr 
+              key={index} 
+              onClick={() => handleRowClick(account)} 
+              style={{ cursor: 'pointer' }}
+            >
               <td>{account['Email Address']}</td>
               <td>{account['Customer Details']}</td>
               <td>{account['Registration Date']}</td>
