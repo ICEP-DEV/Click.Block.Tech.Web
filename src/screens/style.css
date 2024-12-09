@@ -349,26 +349,3 @@ input {
   outline: none;
   border: none;
 }
-
-/* Custom Modal Styles */
-.custom-modal .modal-header {
-  background-color: #1C5288;  /* Deep blue background */
-  color: #fff;                /* White text */
-}
-
-.custom-modal .modal-body {
-  background-color: #eee;  
-}
-
-.custom-modal .modal-footer {
-  background-color: #1C5288;  /* Deep blue background */
-}
-
-.custom-modal .modal-footer .btn-primary {
-  background-color: #1C5288;  /* Blue button background */
-  border-color: #1C5288;      /* Blue border */
-}
-
-.custom-modal .modal-footer .btn-primary:hover {
-  background-color: #155d8c;  /* Darker shade of blue on hover */
-}

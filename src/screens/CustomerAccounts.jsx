@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
-import './noti.css';
 import ProfileHeader from './ProfileHeader';
 import { BASE_URL } from '../API/API'; // Ensure BASE_URL is correctly imported or defined
 
@@ -21,7 +20,6 @@ const CustomerAccounts = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log("Fetched Data:", response.data); // Debug fetched data
         setCustomerAccountsData(response.data);
       } catch (error) {
         console.error('Error fetching customer accounts:', error.response ? error.response.data : error);
@@ -48,7 +46,6 @@ const CustomerAccounts = () => {
   };
 
   const handleRowClick = (customer) => {
-    console.log("Row clicked:", customer); // Debug the click event
     setSelectedCustomer(customer);
     setIsModalOpen(true);
   };
@@ -75,28 +72,51 @@ const CustomerAccounts = () => {
         </thead>
         <tbody>
           {customerAccountsData.map((account, index) => (
-            <tr key={index} onClick={() => handleRowClick(account)}>
-              <td>{account['email']}</td>
-              <td>{account['customerDetails']}</td>
-              <td>{account['registrationDate']}</td>
-              <td>{account['accountStatus']}</td>
-              <td>{account['lastLogin']}</td>
+            <tr key={index} onClick={() => handleRowClick(account)} style={{ cursor: 'pointer' }}>
+              <td>{account['Email Address']}</td>
+              <td>{account['Customer Details']}</td>
+              <td>{account['Registration Date']}</td>
+              <td>{account['Account Status']}</td>
+              <td>{account['Last Login']}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
       {isModalOpen && selectedCustomer && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="close-button" onClick={closeModal}>X</button>
-            <h3>{selectedCustomer.customerDetails}</h3>
-            <p><strong>Email:</strong> {selectedCustomer.email}</p>
-            <p><strong>Phone Number:</strong> {selectedCustomer.phoneNumber}</p>
-            <p><strong>Address:</strong> {selectedCustomer.physicalAddress}</p>
-            <p><strong>Registered On:</strong> {selectedCustomer.registrationDate}</p>
-            <p><strong>Last Login:</strong> {selectedCustomer.lastLogin}</p>
-            <p><strong>Account Status:</strong> {selectedCustomer.accountStatus}</p>
+            <div className="profile-section">
+              <img src={selectedCustomer.profilePicture || 'default-avatar.png'} alt="Customer" className="profile-picture" />
+              <div className="customer-info">
+                <h3>{selectedCustomer['Customer Details']}</h3>
+                <div className="status-badge">Active Now</div>
+                <p>Visited Today {selectedCustomer['Last Login']}</p>
+              </div>
+            </div>
+            <div className="tabs">
+              <button className="tab-button active">Overview</button>
+              <button className="tab-button">Login</button>
+              <button className="tab-button">Transaction</button>
+            </div>
+            <div className="requests-section">
+              <h5>REQUESTS</h5>
+              <p>Support Message <span className="timestamp">Yesterday 08:35</span></p>
+            </div>
+            <div className="activity-log">
+              <h5>RECENT ACTIVITY LOG</h5>
+              {selectedCustomer.activityLog && selectedCustomer.activityLog.map((log, idx) => (
+                <div className={`log-entry ${log.status}`} key={idx}>
+                  <h6>{log.activity}</h6>
+                  <span className="timestamp">{log.date}</span>
+                </div>
+              ))}
+            </div>
+            <div className="button-section">
+              <button className="action-button freeze">Freeze</button>
+              <button className="action-button deactivate">Deactivate</button>
+            </div>
           </div>
         </div>
       )}
