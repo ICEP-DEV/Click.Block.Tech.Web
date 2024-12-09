@@ -5,10 +5,15 @@ import SearchBar from './SearchBar';
 import ProfileHeader from './ProfileHeader';
 import { BASE_URL } from '../API/API'; // Ensure BASE_URL is correctly imported or defined
 
+// Import the new modal component
+import CustomerDetailsModal from './CustomerDetailsModal';
+
 const CustomerAccounts = () => {
   const [customerAccountsData, setCustomerAccountsData] = useState([]);
-  const [selectedCustomer, setSelectedCustomer] = useState(null); // State for selected customer
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [transactionData, setTransactionData] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,14 +50,28 @@ const CustomerAccounts = () => {
     }
   };
 
-  const handleRowClick = (customer) => {
+  const handleRowClick = async (customer) => {
     setSelectedCustomer(customer);
+    // Fetch the transaction details for this customer if needed
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await axios.get(`${BASE_URL}/transactions/${customer.CustomerID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setTransactionData(response.data); // This should return an array or single transaction object
+    } catch (error) {
+      console.error('Error fetching transaction data:', error.response ? error.response.data : error);
+    }
+
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setSelectedCustomer(null);
     setIsModalOpen(false);
+    setTransactionData(null);
   };
 
   return (
@@ -83,43 +102,12 @@ const CustomerAccounts = () => {
         </tbody>
       </table>
 
-      {isModalOpen && selectedCustomer && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-button" onClick={closeModal}>X</button>
-            <div className="profile-section">
-              <img src={selectedCustomer.profilePicture || 'default-avatar.png'} alt="Customer" className="profile-picture" />
-              <div className="customer-info">
-                <h3>{selectedCustomer['Customer Details']}</h3>
-                <div className="status-badge">Active Now</div>
-                <p>Visited Today {selectedCustomer['Last Login']}</p>
-              </div>
-            </div>
-            <div className="tabs">
-              <button className="tab-button active">Overview</button>
-              <button className="tab-button">Login</button>
-              <button className="tab-button">Transaction</button>
-            </div>
-            <div className="requests-section">
-              <h5>REQUESTS</h5>
-              <p>Support Message <span className="timestamp">Yesterday 08:35</span></p>
-            </div>
-            <div className="activity-log">
-              <h5>RECENT ACTIVITY LOG</h5>
-              {selectedCustomer.activityLog && selectedCustomer.activityLog.map((log, idx) => (
-                <div className={`log-entry ${log.status}`} key={idx}>
-                  <h6>{log.activity}</h6>
-                  <span className="timestamp">{log.date}</span>
-                </div>
-              ))}
-            </div>
-            <div className="button-section">
-              <button className="action-button freeze">Freeze</button>
-              <button className="action-button deactivate">Deactivate</button>
-            </div>
-          </div>
-        </div>
-      )}
+      <CustomerDetailsModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        customer={selectedCustomer}
+        transactionData={transactionData}
+      />
     </div>
   );
 };
