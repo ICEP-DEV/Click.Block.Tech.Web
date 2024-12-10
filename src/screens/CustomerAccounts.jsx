@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import ProfileHeader from './ProfileHeader';
-import CustomerDetailsModal from './CustomerDetailsModal'; 
+import CustomerDetailsModal from './CustomerDetailsModal';
 import { BASE_URL } from '../API/API'; // Ensure BASE_URL is correctly imported or defined
 
 const CustomerAccounts = () => {
@@ -51,8 +51,9 @@ const CustomerAccounts = () => {
   const handleRowClick = async (customer) => {
     setSelectedCustomer(customer);
 
-    // Assume the customer object has a TransactionID property
-    const transactionId = customer.TransactionID || 123456790; // fallback example
+    // If the backend returns a TransactionID with the customer details, use it.
+    // Otherwise, comment this out or handle differently.
+    const transactionId = customer.TransactionID || 123456790; // replace with actual logic if needed
 
     try {
       // Fetch transaction details using the provided API endpoint

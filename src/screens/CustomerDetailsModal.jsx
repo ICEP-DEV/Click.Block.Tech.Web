@@ -6,15 +6,14 @@ const CustomerDetailsModal = ({ isOpen, onClose, customer, transactionData }) =>
     return null;
   }
 
-  // Example data points (adjust keys to match your actual data)
-  const fullName = customer['Fullname(s)'] || 'N/A';
-  const email = customer['Email Address'] || 'N/A';
-  const phone = customer['Phone number'] || 'N/A';
-  const address = customer['Physical Address'] || 'N/A';
-  const registeredOn = customer['Registered On'] || 'N/A';
-  const verified = customer['Verified'] || 'N/A';
-  const lastLogin = customer['Last Login'] || 'N/A';
+  // Extract fields directly from the API data
+  const customerDetails = customer['Customer Details'];
+  const email = customer['Email Address'];
+  const registrationDate = customer['Registration Date'];
+  const accountStatus = customer['Account Status'];
+  const lastLogin = customer['Last Login'];
 
+  // Placeholder requests & activityLog data - replace with actual API data if available
   const requests = customer.requests || [
     { type: 'Support Message', date: 'Yesterday 08:35' }
   ];
@@ -41,17 +40,15 @@ const CustomerDetailsModal = ({ isOpen, onClose, customer, transactionData }) =>
         <div className="custom-profile-section">
           <div className="status-row">
             <span className="status-indicator"></span>
-            <span className="status-text">Active Now</span>
+            <span className="status-text">{accountStatus}</span>
             <span className="visited-text">Visited Today {lastLogin}</span>
           </div>
-          <h2 className="customer-name">{fullName}</h2>
+          <h2 className="customer-name">{customerDetails}</h2>
           <div className="customer-details">
-            <p><span>Fullname(s):</span> {fullName}</p>
+            <p><span>Customer Details:</span> {customerDetails}</p>
             <p><span>Email Address:</span> {email}</p>
-            <p><span>Phone number:</span> {phone}</p>
-            <p><span>Physical Address:</span> {address}</p>
-            <p><span>Registered On:</span> {registeredOn}</p>
-            <p><span>Verified:</span> {verified}</p>
+            <p><span>Registration Date:</span> {registrationDate}</p>
+            <p><span>Account Status:</span> {accountStatus}</p>
             <p><span>Last Login:</span> {lastLogin}</p>
           </div>
         </div>
@@ -76,7 +73,6 @@ const CustomerDetailsModal = ({ isOpen, onClose, customer, transactionData }) =>
           ))}
         </div>
 
-        {/* Display transaction details if provided */}
         {transactionData && (
           <>
             <h3 className="section-title">TRANSACTION DETAILS</h3>
