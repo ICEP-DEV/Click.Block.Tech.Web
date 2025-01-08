@@ -1,8 +1,22 @@
-import React from 'react';
-import { FaUserCircle } from 'react-icons/fa';
-import './style.css';
+import React, { useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import "./style.css";
+import SupportMessagesModal from "./SupportMessagesModal.jsx";
 
 const SupportMessages = ({ supportMessages }) => {
+  const [selectedMessage, setSelectedMessage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleViewClick = (msg) => {
+    setSelectedMessage(msg);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMessage(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="support-messages-section">
       <div className="support-messages-container">
@@ -14,7 +28,6 @@ const SupportMessages = ({ supportMessages }) => {
                 <h3 className="support-card-name">
                   {msg.initials} {msg.surname}
                 </h3>
-                {/* <p className="support-card-email">{msg.email}</p> */}
               </div>
             </div>
             <div className="support-card-body">
@@ -34,11 +47,22 @@ const SupportMessages = ({ supportMessages }) => {
             </div>
             <div className="support-buttons">
               <button className="resolve-btn">Resolve</button>
-              <button className="view-btn">View</button>
+              <button
+                className="view-btn"
+                onClick={() => handleViewClick(msg)}
+              >
+                View
+              </button>
             </div>
           </div>
         ))}
       </div>
+
+      <SupportMessagesModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        customer={selectedMessage}
+      />
     </div>
   );
 };

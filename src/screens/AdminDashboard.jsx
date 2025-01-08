@@ -67,6 +67,7 @@ const AdminDashboard = () => {
           email: msg.Email,
           message: msg.MessageDescription,
           status: msg.Status,
+          customerID: msg.CustID_Nr,
         }));
         setSupportMessages(formattedMessages);
       } catch (error) {
