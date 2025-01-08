@@ -1,4 +1,5 @@
 /* Modal Overlay */
+/* Modal Overlay */
 .custom-modal-overlay {
   display: flex;
   align-items: center;
@@ -8,32 +9,39 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  }
-  
-  /* Modal Content */
-  .custom-modal-content {
-    background: #fff;
-    border-radius: 8px;
-    width: 700px;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    padding: 20px 30px;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .custom-close-button {
-    position: absolute;
-    right: 30px;
-    top: 30px;
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    line-height: 1;
-    cursor: pointer;
-  }
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+/* Modal Content */
+.custom-modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Close Button */
+.custom-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+.custom-close-button:hover {
+  color: #e74c3c;
+}
   
   /* Tabs */
   .custom-tabs {
@@ -65,10 +73,11 @@
   
   /* Profile Section */
   .custom-profile-section {
-    background: #f9f9f9;
-    border-radius: 8px;
+    background: #f8f9fa;
     padding: 20px;
-    margin-bottom: 30px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
   .action-button.resolve {
     background-color: #87ceeb; /* Light blue */
@@ -93,7 +102,9 @@
     border-radius: 50%;
     margin-right: 8px;
   }
-  
+  .blue-text {
+    color: #3498db;
+  }
   .status-text {
     font-size: 14px;
     color: #2ecc71;
@@ -116,16 +127,13 @@
   
   .customer-details p {
     font-size: 14px;
-    color: #333;
-    margin: 8px 0;
-    line-height: 1.4;
+  color: #34495e;
+  margin: 10px 0;
   }
   
-  .customer-details p span {
-    font-weight: 600;
-    color: #000;
-    display: inline-block;
-    width: 150px;
+  .customer-details p strong {
+    font-weight: bold;
+    color: #2c3e50;
   }
   
   /* Section Titles */
@@ -200,8 +208,8 @@
   /* Action Buttons */
   .action-button-section {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
   }
   
   .action-button {
@@ -211,8 +219,8 @@
     padding: 10px 20px;
     border-radius: 6px;
     cursor: pointer;
-    font-weight: 500;
-    margin-left: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
     transition: background 0.3s;
   }
   
@@ -235,9 +243,7 @@
   .action-button.deactivate:hover {
     background: #c0392b;
   }
-  .blue-text {
-    color: blue;
-  }
+
   
   .blue-button {
     background-color: blue;
