@@ -1,30 +1,23 @@
 /* Modal Overlay */
 /* Modal Overlay */
 .custom-modal-overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Lower z-index so it stays behind SuccessModal */
 }
 
-/* Modal Content */
 .custom-modal-content {
-  background: #ffffff;
-  border-radius: 12px;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
   width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  padding: 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.3s ease;
-  font-family: 'Arial', sans-serif;
 }
 
 /* Close Button */
@@ -124,7 +117,14 @@
     margin-bottom: 20px;
     margin-top: 10px;
   }
-  
+  .customer-details {
+    display: flex; /* Make it a flex container */
+    justify-content: center; /* Center the entire block horizontally */
+    /* align-items: center; Vertically center items within the container */
+    text-align: left; /* Align text lines to the left within the container */
+    flex-direction: column; /* Ensure content stacks vertically */
+    height: 50vh; /* Optional: Adjust based on container height */
+  }
   .customer-details p {
     font-size: 14px;
   color: #34495e;
@@ -278,4 +278,14 @@
   margin-top: 50px; /* Ensure there's no overlap with the button */
   font-size: 24px;
   font-weight: bold;
+}
+
+
+.action-button.success {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

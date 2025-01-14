@@ -5,15 +5,14 @@ import SearchBar from './SearchBar';
 import ProfileHeader from './ProfileHeader';
 import CustomerDetailsModal from './CustomerDetailsModal';
 import { BASE_URL } from '../API/API'; // Ensure BASE_URL is correctly imported or defined
-
+ 
 const CustomerAccounts = () => {
   const [customerAccountsData, setCustomerAccountsData] = useState([]);
-  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedCustomerDetails, setSelectedCustomerDetails] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [transactionData, setTransactionData] = useState(null);
-
+ 
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     const fetchCustomerAccounts = async () => {
       try {
@@ -28,10 +27,10 @@ const CustomerAccounts = () => {
         console.error('Error fetching customer accounts:', error.response ? error.response.data : error);
       }
     };
-
+ 
     fetchCustomerAccounts();
   }, []);
-
+ 
   const handleSearch = (searchTerm) => {
     if (searchTerm.toLowerCase() === 'all') {
       navigate('/customer-accounts');
@@ -47,31 +46,22 @@ const CustomerAccounts = () => {
       navigate('/dashboard');
     }
   };
-
+ 
   const handleRowClick = async (customer) => {
-    setSelectedCustomer(customer);
-
-    // If the backend returns a TransactionID with the customer details, use it.
-    // Otherwise, comment this out or handle differently.
-    const transactionId = customer.TransactionID || 123456790; // replace with actual logic if needed
-
     try {
-      // Fetch transaction details using the provided API endpoint
-      const response = await axios.get(`http://localhost:5000/api/getTransactionByID/${transactionId}`);
-      setTransactionData(response.data);
+      const response = await axios.get(`${BASE_URL}/getCustomerDetails/${customer.CustID_Nr}`);
+      setSelectedCustomerDetails(response.data);
+      setIsModalOpen(true);
     } catch (error) {
-      console.error('Error fetching transaction data:', error.response ? error.response.data : error);
+      console.error('Error fetching customer details:', error.response ? error.response.data : error);
     }
-
-    setIsModalOpen(true);
   };
-
+ 
   const closeModal = () => {
-    setSelectedCustomer(null);
-    setTransactionData(null);
+    setSelectedCustomerDetails(null);
     setIsModalOpen(false);
   };
-
+ 
   return (
     <div className="dashboard-container">
       <ProfileHeader />
@@ -89,9 +79,9 @@ const CustomerAccounts = () => {
         </thead>
         <tbody>
           {customerAccountsData.map((account, index) => (
-            <tr 
-              key={index} 
-              onClick={() => handleRowClick(account)} 
+            <tr
+              key={index}
+              onClick={() => handleRowClick(account)}
               style={{ cursor: 'pointer' }}
             >
               <td>{account['Email Address']}</td>
@@ -103,15 +93,16 @@ const CustomerAccounts = () => {
           ))}
         </tbody>
       </table>
-
-      <CustomerDetailsModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        customer={selectedCustomer}
-        transactionData={transactionData}
-      />
+ 
+      {isModalOpen && (
+        <CustomerDetailsModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          customerDetails={selectedCustomerDetails}
+        />
+      )}
     </div>
   );
 };
-
+ 
 export default CustomerAccounts;
