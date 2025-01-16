@@ -11,6 +11,8 @@ import useLocationIDStore from '../stores/locationID_store';
 import { BASE_URL } from '../API/API';
 import axios from 'axios';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import appLogo from '../assets/Logo.png';
 
  function RealTimeTracking() {
   const updateLocationID = useLocationIDStore((state) => state.updateLocationID);
@@ -81,7 +83,9 @@ import { useState } from 'react';
         </div>
         
         <div className="header-logo">
-          <h1>NEXIS</h1>
+        <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+        <img src={appLogo} alt="App Logo" className="center-logo-img" />
+        </Link>
           <p className="subtitle"> Real-time Tracking {updatedLocationID} </p>
         </div>
 

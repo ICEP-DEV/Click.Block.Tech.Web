@@ -9,6 +9,7 @@ const SupportMessagesModal = ({ isOpen, onClose, customer }) => {
   const [isResolving, setIsResolving] = useState(false);
   const [adminResponse, setAdminResponse] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (isOpen && customer) {
@@ -18,8 +19,9 @@ const SupportMessagesModal = ({ isOpen, onClose, customer }) => {
             `${BASE_URL}/getCustomerDetails/${customer.customerID}`
           );
           setCustomerDetails(response.data);
-        } catch (error) {
-          console.error("Error fetching customer details:", error);
+        } catch (err) {
+          console.error("Error fetching customer details:", err);
+          setError("Failed to load customer details. Please try again.");
         }
       };
       fetchCustomerDetails();
@@ -61,10 +63,16 @@ const SupportMessagesModal = ({ isOpen, onClose, customer }) => {
           className="custom-modal-content"
           onClick={(e) => e.stopPropagation()}
         >
-          <button className="custom-close-button" onClick={onClose}>
+          <button
+            className="custom-close-button"
+            onClick={onClose}
+            aria-label="Close modal"
+          >
             &times;
           </button>
-          <h2 className="customer-name">{customerDetails?.name || "Customer Details"}</h2>
+          <h2 className="customer-name">
+            {customerDetails?.name || "Customer Details"}
+          </h2>
 
           <div className="custom-profile-section">
             {customerDetails ? (
@@ -137,6 +145,16 @@ const SupportMessagesModal = ({ isOpen, onClose, customer }) => {
             )}
           </div>
 
+          {/* Improved Error Display */}
+          {error && (
+            <div className="error-message">
+              <span role="img" aria-label="error">
+                ❌
+              </span>{" "}
+              {error}
+            </div>
+          )}
+
           {!isResolving && (
             <div className="action-button-section">
               <button
@@ -145,7 +163,9 @@ const SupportMessagesModal = ({ isOpen, onClose, customer }) => {
               >
                 Resolve
               </button>
-              <button className="action-button important">Mark as Important</button>
+              <button className="action-button important">
+                Mark as Important
+              </button>
             </div>
           )}
         </div>

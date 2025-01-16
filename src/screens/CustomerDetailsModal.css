@@ -289,3 +289,8 @@
   border-radius: 5px;
   cursor: pointer;
 }
+@media (max-width: 768px) {
+  .custom-modal-content {
+    width: 90%; /* Adjust width for smaller screens */
+  }
+}
