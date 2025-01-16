@@ -141,7 +141,7 @@ const SupportMessagesModal = ({ isOpen, onClose, customer }) => {
                 )}
               </div>
             ) : (
-              <p>Loading customer details...</p>
+              <p style={{color: 'red'}}>Error Loading customer details...</p>
             )}
           </div>
 
