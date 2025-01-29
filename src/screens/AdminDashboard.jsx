@@ -22,7 +22,17 @@ const AdminDashboard = () => {
   const [panicAlertsDate, setAlertData] = useState([]);
   const [selectedMonthYear, setSelectedMonthYear] = useState('Jan 2024');
   const [showModal, setShowModal] = useState(false);
+  const [showAccountModal, setShowAccountModal] = useState(false);
+  const [selectedAccountNumber, setSelectedAccountNumber] = useState(null);
 
+  const handleAccountModalClose = () => {
+    setShowAccountModal(false);
+  };
+  
+  const handleAccountModalOpen = (accountNumber) => {
+    setSelectedAccountNumber(accountNumber);
+    setShowAccountModal(true);
+  };
   // Modal control functions
   const handleModalClose = () => {
     setShowModal(false);
@@ -146,8 +156,8 @@ const AdminDashboard = () => {
       />
       <h1 className="dashboard-heading">Incoming Panic Alerts</h1>
       <IncomingPanicAlerts tableData={panicAlertsDate} />
-      <h1 className="dashboard-heading">Account Actions Log</h1>
-      <AccountActionsLog tableData={tableData} />
+      <h1 className="dashboard-heading">Recent Performed Actions</h1>
+      <AccountActionsLog tableData={tableData} onAccountClick={handleAccountModalOpen} />
       <h2 className="dashboard-heading">Support Messages</h2>
       <SupportMessages supportMessages={supportMessages} />
 
@@ -161,6 +171,49 @@ const AdminDashboard = () => {
   <Modal.Footer>
     <Button variant="primary" onClick={handleModalClose}>
       OK
+    </Button>
+  </Modal.Footer>
+</Modal>
+
+<Modal show={showAccountModal} onHide={handleAccountModalClose} centered className="custom-modal">
+  <Modal.Header closeButton>
+    <Modal.Title>
+      <div className="modal-header-buttons">
+        <Button variant="outline-primary" className="me-2">Overview</Button>
+        <Button variant="outline-secondary">Recents</Button>
+      </div>
+    </Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <div className="modal-content-container">
+      {/* Left Side: Mini Map */}
+      <div className="map-container">
+        {/* Replace this div with the actual mini-map integration */}
+        <div className="mini-map">[Mini Map Here]</div>
+      </div>
+
+      {/* Right Side: User Details and Chart */}
+      <div className="user-details-container">
+        <h4 style={{ fontWeight: 'bold' }}>John Doe</h4> {/* Replace with dynamic data */}
+        <p>
+          <strong>Full Name:</strong> Johnathan Doe<br />
+          <strong>Email:</strong> john.doe@example.com<br />
+          <strong>Phone:</strong> +1 234 567 890<br />
+          <strong>Address:</strong> 123 Main Street, Springfield<br />
+        </p>
+
+        {/* Mini Line Chart */}
+        <div className="mini-chart">
+          {/* Placeholder for mini line chart */}
+          <p style={{ fontWeight: 'bold' }}>Panic Button Usage</p>
+          <div>[Line Chart Here]</div>
+        </div>
+      </div>
+    </div>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={handleAccountModalClose}>
+      Close
     </Button>
   </Modal.Footer>
 </Modal>

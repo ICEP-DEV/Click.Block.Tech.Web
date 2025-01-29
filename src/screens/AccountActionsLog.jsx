@@ -1,10 +1,9 @@
 import React from 'react';
 import './style.css';
 
-const AccountActionsLog = ({ tableData }) => {
+const AccountActionsLog = ({ tableData, onAccountClick }) => {
   return (
     <div className="table-section">
-     
       <table className="data-table">
         <thead>
           <tr>
@@ -17,7 +16,7 @@ const AccountActionsLog = ({ tableData }) => {
         </thead>
         <tbody>
           {tableData.map((row, index) => (
-            <tr key={index}>
+            <tr key={index} onClick={() => onAccountClick(row.accountNumber)} className="clickable-row">
               <td>{row.accountNumber}</td>
               <td>{row.actionType}</td>
               <td>{row.dateTime}</td>

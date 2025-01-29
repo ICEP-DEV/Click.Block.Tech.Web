@@ -12,6 +12,33 @@
   align-items: center;
   z-index: 1000; /* Lower z-index so it stays behind SuccessModal */
 }
+.modal-content-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.map-container {
+  flex: 1;
+  height: 200px;
+  background-color: #f1f1f1; /* Placeholder background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-details-container {
+  flex: 1;
+}
+
+.mini-chart {
+  margin-top: 1rem;
+  height: 150px;
+  background-color: #f9f9f9; /* Placeholder background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .custom-modal-content {
   background: white;
