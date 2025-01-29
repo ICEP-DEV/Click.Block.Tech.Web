@@ -21,7 +21,17 @@ body {
   right: 0;
   z-index: 1000;
 }
+.custom-modal .modal-dialog {
+  max-width: 1000px; /* Reduce width */
+  width: 90%; /* Make it responsive */
+  height: 80vh; /* Increase height */
+}
 
+.custom-modal .modal-content {
+  height: 100%;
+  width: 800px;
+  overflow-y: auto; /* Enables scrolling if content overflows */
+}
 .profile-icon {
   position: relative;
   cursor: pointer;

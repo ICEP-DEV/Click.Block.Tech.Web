@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Card } from "react-bootstrap";
 import './style.css';
 import ProfileHeader from './ProfileHeader';
 import StatsCards from './StatsCards';
@@ -161,62 +161,75 @@ const AdminDashboard = () => {
       <h2 className="dashboard-heading">Support Messages</h2>
       <SupportMessages supportMessages={supportMessages} />
 
-      <Modal show={showModal} onHide={handleModalClose} centered className="custom-modal">
-  <Modal.Header closeButton>
-    <Modal.Title>Alert Resolved!</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    The panic alert was successfully resolved. Click "OK" to refresh the page.
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="primary" onClick={handleModalClose}>
-      OK
-    </Button>
-  </Modal.Footer>
-</Modal>
+      <Modal show={showAccountModal} onHide={handleAccountModalClose} centered className="custom-modal">
+      <Modal.Header closeButton>
+        <Modal.Title>
+          <div className="modal-header-buttons">
+            <Button variant="outline-primary" className="me-2">Overview</Button>
+            <Button variant="outline-secondary">Recents</Button>
+          </div>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="modal-content-container">
+          {/* Left Side: Mini Map */}
+          <div className="map-container">
+            <div className="mini-map">[Mini Map Here]</div>
+          </div>
 
-<Modal show={showAccountModal} onHide={handleAccountModalClose} centered className="custom-modal">
-  <Modal.Header closeButton>
-    <Modal.Title>
-      <div className="modal-header-buttons">
-        <Button variant="outline-primary" className="me-2">Overview</Button>
-        <Button variant="outline-secondary">Recents</Button>
-      </div>
-    </Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <div className="modal-content-container">
-      {/* Left Side: Mini Map */}
-      <div className="map-container">
-        {/* Replace this div with the actual mini-map integration */}
-        <div className="mini-map">[Mini Map Here]</div>
-      </div>
+          {/* Right Side: User Details and Chart */}
+          <div className="user-details-container">
+            <h4 style={{ fontWeight: "bold" }}>John Doe</h4> {/* Replace with dynamic data */}
+            <p>
+              <strong>Full Name:</strong> Johnathan Doe<br />
+              <strong>Email:</strong> john.doe@example.com<br />
+              <strong>Phone:</strong> +1 234 567 890<br />
+              <strong>Address:</strong> 123 Main Street, Springfield<br />
+            </p>
 
-      {/* Right Side: User Details and Chart */}
-      <div className="user-details-container">
-        <h4 style={{ fontWeight: 'bold' }}>John Doe</h4> {/* Replace with dynamic data */}
-        <p>
-          <strong>Full Name:</strong> Johnathan Doe<br />
-          <strong>Email:</strong> john.doe@example.com<br />
-          <strong>Phone:</strong> +1 234 567 890<br />
-          <strong>Address:</strong> 123 Main Street, Springfield<br />
-        </p>
+            {/* Mini Line Chart and Alert Count */}
+            <div className="chart-alert-container d-flex align-items-center">
+              <div className="mini-chart me-3">
+                <p style={{ fontWeight: "bold" }}>Panic Button Usage</p>
+                <div>[Line Chart Here]</div>
+              </div>
+              <Card className="alert-card text-white bg-primary">
+                <Card.Body>
+                  <Card.Title>Total Panic Alerts</Card.Title>
+                  <h3>5</h3> {/* Replace with dynamic data */}
+                </Card.Body>
+              </Card>
+            </div>
 
-        {/* Mini Line Chart */}
-        <div className="mini-chart">
-          {/* Placeholder for mini line chart */}
-          <p style={{ fontWeight: 'bold' }}>Panic Button Usage</p>
-          <div>[Line Chart Here]</div>
+            {/* Recent Activations */}
+            <div className="recent-activations mt-3">
+              <h5 style={{ fontWeight: "bold" }}>Recent Activations</h5>
+              <div className="activation-entry">
+                <p>
+                  <strong>Alert Triggered:</strong> 2025-01-28 14:30<br />
+                  <strong>Frozen:</strong> No<br />
+                  <strong>Activity Location:</strong> Downtown, Springfield<br />
+                  <strong>Alert to SAPS:</strong> Yes
+                </p>
+              </div>
+              <div className="activation-entry">
+                <p>
+                  <strong>Alert Triggered:</strong> 2025-01-27 10:15<br />
+                  <strong>Frozen:</strong> Yes<br />
+                  <strong>Activity Location:</strong> Westside Mall<br />
+                  <strong>Alert to SAPS:</strong> No
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleAccountModalClose}>
-      Close
-    </Button>
-  </Modal.Footer>
-</Modal>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleAccountModalClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
 
       <Footer />
     </div>
