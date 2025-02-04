@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Card,Row, Col } from "react-bootstrap";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from "leaflet";
+import 'leaflet/dist/leaflet.css';
 import './style.css';
 import ProfileHeader from './ProfileHeader';
 import StatsCards from './StatsCards';
@@ -27,6 +30,14 @@ const AdminDashboard = () => {
   const [customerDetails, setCustomerDetails] = useState(null);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
+const defaultPosition = [-26.2041, 28.0473]; // Example: Johannesburg, SA
+
+const customIcon = new L.Icon({
+  iconUrl: "/location.png", // Path to your image
+  iconSize: [32, 32], // Size of the icon
+  iconAnchor: [16, 32], // Anchor point
+  popupAnchor: [0, -32], // Popup position
+});
 
   const handleAccountModalClose = () => {
     setShowAccountModal(false);
@@ -40,7 +51,7 @@ const [error, setError] = useState(null);
     try {
       const response = await axios.get(`${BASE_URL}/customerDetailsAlert/${accountNumber}`);
       setCustomerDetails(response.data);
-      console.log(customerDetails);
+
     } catch (err) {
       console.error("Error fetching customer details:", err);
       setError("Failed to load data");
@@ -191,11 +202,19 @@ const [error, setError] = useState(null);
           <div className="modal-content-container">
             <Row>
               {/* Left Side: Mini Map */}
-              <Col md={5}>
+            <Col md={5}>
                 <div className="map-container">
-                  <div className="mini-map">[Mini Map Placeholder]</div>
+                  <MapContainer center={defaultPosition} zoom={13} style={{ height: "250px", width: "100%" }}>
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    <Marker position={defaultPosition} icon={customIcon}>
+                      <Popup>Last Known Location</Popup>
+                    </Marker>
+                  </MapContainer>
                 </div>
-              </Col>
+          </Col>
 
               {/* Right Side: User Details */}
               <Col md={7}>
