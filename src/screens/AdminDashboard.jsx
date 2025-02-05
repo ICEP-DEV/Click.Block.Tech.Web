@@ -30,7 +30,7 @@ const AdminDashboard = () => {
   const [customerDetails, setCustomerDetails] = useState(null);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
-const defaultPosition = [-26.2041, 28.0473]; // Example: Johannesburg, SA
+const [defaultPosition, setDefaultPosition] = useState([-26.2041, 28.0473]); // Example: Johannesburg, SA
 
 const customIcon = new L.Icon({
   iconUrl: "/location.png", // Path to your image
@@ -51,6 +51,14 @@ const customIcon = new L.Icon({
     try {
       const response = await axios.get(`${BASE_URL}/customerDetailsAlert/${accountNumber}`);
       setCustomerDetails(response.data);
+      
+      const recentActivations = response.data?.recentActivation;
+      if (recentActivations && recentActivations.length > 0) {
+        const latestActivation = recentActivations[0]; // Assuming the first item is the most recent
+        const latitude = parseFloat(latestActivation.latitude) || -26.2041;
+        const longitude = parseFloat(latestActivation.longitude) || 28.0473;
+        setDefaultPosition([latitude, longitude]);
+      }
 
     } catch (err) {
       console.error("Error fetching customer details:", err);
@@ -59,11 +67,6 @@ const customIcon = new L.Icon({
       setLoading(false);
       setShowAccountModal(true);
     }
-  };
-  // Modal control functions
-  const handleModalClose = () => {
-    setShowModal(false);
-    window.location.reload(); // Refresh the page after modal is closed
   };
 
   // Fetch account actions log
